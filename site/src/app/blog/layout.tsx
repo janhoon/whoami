@@ -8,7 +8,7 @@ export default function BlogLayout({
 }: { children: React.ReactNode }) {
 	return (
 		<div className="flex flex-col items-center justify-center w-full">
-			<div className="flex flex-col items-center justify-center w-2/3">
+			<div className="flex flex-col items-center justify-center sm:w-2/3 w-full px-4">
 				<div className="flex flex-row items-center justify-between w-full py-4">
 					<Link href="/blog" className="flex flex-row items-end gap-2">
 						<span className="text-4xl font-bold">Jan Hoon</span>

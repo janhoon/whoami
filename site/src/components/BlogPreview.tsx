@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import allPosts from "@/static/blog_posts.json";
 import Link from "next/link";
+import { BookIcon } from "lucide-react";
 
 export default function BlogPreview() {
 	const blogPosts = allPosts.slice(0, 3);
@@ -23,7 +24,13 @@ export default function BlogPreview() {
 							className="p-4 rounded-lg border-b last:border-b-0 hover:bg-gray-700 w-full"
 						>
 							<h4 className="font-bold">{post.title}</h4>
-							<p className="text-sm text-gray-400">{post.date}</p>
+							<div className="flex flex-row items-center justify-between">
+								<p className="text-sm text-gray-400">{post.date}</p>
+								<span className="flex flex-row items-center justify-center gap-2 text-green-600 hover:underline">
+									<BookIcon className="w-4 h-4" />
+									Read more
+								</span>
+							</div>
 						</motion.li>
 					</Link>
 				))}

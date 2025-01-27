@@ -100,8 +100,11 @@ export default function Home() {
 
 	return (
 		<div className="h-screen flex flex-col  overflow-hidden">
-			<div className="w-full flex flex-row py-2">
-				<Link href="/blog" className="flex flex-row items-center p-2 gap-1">
+			<div className="w-full flex flex-row py-4 px-4">
+				<Link
+					href="/blog"
+					className="flex flex-row items-center p-2 gap-1 hover:text-green-600"
+				>
 					<BookIcon className="w-4 h-4" />
 					Blog
 				</Link>
@@ -129,6 +132,7 @@ export default function Home() {
 									height={290}
 									className="rounded-full shadow-lg w-[290px] h-[290px]"
 									style={{ transform: "translateZ(40px)" }}
+									priority
 								/>
 							</motion.button>
 							<div className="absolute inset-0 z-10">
