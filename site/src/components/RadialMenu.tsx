@@ -36,7 +36,7 @@ export default function RadialMenu({
 							className={`absolute w-12 h-12 rounded-full flex items-center justify-center ${
 								activeTab === item.name
 									? "bg-green-600 text-white"
-									: "bg-gray-200 text-gray-600"
+									: "bg-gray-700 text-gray-300"
 							}`}
 							style={{
 								left: `calc(50% + ${x}px - 24px)`,

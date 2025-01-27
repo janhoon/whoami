@@ -15,15 +15,15 @@ export default function SocialLinks() {
       transition={{ duration: 0.5 }}
       className="fixed top-4 right-4 flex flex-col space-y-4"
     >
-      {socialLinks.map((link, index) => (
+      {socialLinks.map((link) => (
         <motion.a
-          key={index}
+          key={link.url}
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
-          className="text-gray-600 hover:text-gray-800"
+          className="text-gray-100 hover:text-gray-300"
         >
           {link.icon}
         </motion.a>

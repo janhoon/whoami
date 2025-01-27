@@ -15,7 +15,7 @@ import RadialMenu from "../components/RadialMenu";
 import Image from "next/image";
 import profilePicture from "@/images/pfp.jpg";
 import Link from "next/link";
-import { BookIcon } from "lucide-react";
+import { ArrowRightIcon, BookIcon } from "lucide-react";
 
 // Move tabs outside component
 const tabs = ["about", "blog", "projects"];
@@ -174,7 +174,18 @@ export default function Home() {
 										platforms to drive insights and innovation.
 									</p>
 								)}
-								{activeTab === "blog" && <BlogPreview />}
+								{activeTab === "blog" && (
+									<div>
+										<BlogPreview />
+										<Link
+											href="/blog"
+											className="flex flex-row items-center gap-1 text-green-500"
+										>
+											View All
+											<ArrowRightIcon className="w-4 h-4" />
+										</Link>
+									</div>
+								)}
 								{activeTab === "projects" && <ProjectShowcase />}
 							</motion.div>
 						</AnimatePresence>
