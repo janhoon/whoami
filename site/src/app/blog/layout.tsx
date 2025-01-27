@@ -1,6 +1,5 @@
 "use client";
 
-import BlogPreview from "@/components/BlogPreview";
 import { HomeIcon } from "lucide-react";
 import Link from "next/link";
 
