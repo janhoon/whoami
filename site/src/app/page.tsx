@@ -1,101 +1,187 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import {
+	motion,
+	AnimatePresence,
+	useMotionValue,
+	useSpring,
+	useTransform,
+} from "framer-motion";
+import SocialLinks from "../components/SocialLinks";
+import BlogPreview from "../components/BlogPreview";
+import ProjectShowcase from "../components/ProjectShowcase";
+import RadialMenu from "../components/RadialMenu";
 import Image from "next/image";
+import profilePicture from "@/images/pfp.jpg";
+import Link from "next/link";
+import { BookIcon } from "lucide-react";
+
+// Move tabs outside component
+const tabs = ["about", "blog", "projects"];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+	const [activeTab, setActiveTab] = useState("about");
+	const [isMenuOpen, setIsMenuOpen] = useState(true);
+	const [lastScrollTime, setLastScrollTime] = useState(0);
+	const [scrollAccumulator, setScrollAccumulator] = useState(0);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	const x = useMotionValue(0);
+	const y = useMotionValue(0);
+
+	const height = 10;
+
+	const rotateX = useTransform(y, [300, -300], [height, -height]);
+	const rotateY = useTransform(x, [300, -300], [-height, height]);
+
+	const springConfig = { stiffness: 3000, damping: 30 };
+	const springX = useSpring(rotateX, springConfig);
+	const springY = useSpring(rotateY, springConfig);
+
+	const changeTab = useCallback(
+		(direction: "next" | "prev") => {
+			const currentIndex = tabs.indexOf(activeTab);
+			let newIndex: number;
+
+			if (direction === "next") {
+				newIndex = currentIndex === tabs.length - 1 ? 0 : currentIndex + 1;
+			} else {
+				newIndex = currentIndex === 0 ? tabs.length - 1 : currentIndex - 1;
+			}
+
+			setActiveTab(tabs[newIndex]);
+		},
+		[activeTab],
+	);
+
+	useEffect(() => {
+		const handleMouseMove = (event: MouseEvent) => {
+			const centerX = window.innerWidth / 2;
+			const centerY = window.innerHeight / 2;
+			x.set(event.clientX - centerX);
+			y.set(event.clientY - centerY);
+		};
+
+		window.addEventListener("mousemove", handleMouseMove);
+
+		return () => {
+			window.removeEventListener("mousemove", handleMouseMove);
+		};
+	}, [x, y]);
+
+	useEffect(() => {
+		const handleWheel = (event: WheelEvent) => {
+			const now = Date.now();
+			if (now - lastScrollTime < 500) {
+				// Accumulate scroll within the throttle window
+				setScrollAccumulator((prev) => prev + event.deltaY);
+				return;
+			}
+
+			const threshold = 300; // Adjust this value to require more/less scrolling
+			const newAccumulator = scrollAccumulator + event.deltaY;
+
+			if (Math.abs(newAccumulator) >= threshold) {
+				setLastScrollTime(now);
+				if (newAccumulator > 0) {
+					changeTab("next");
+				} else {
+					changeTab("prev");
+				}
+				setScrollAccumulator(0); // Reset accumulator after changing tab
+			} else {
+				setScrollAccumulator(newAccumulator);
+			}
+		};
+
+		window.addEventListener("wheel", handleWheel);
+		return () => window.removeEventListener("wheel", handleWheel);
+	}, [lastScrollTime, scrollAccumulator, changeTab]);
+
+	return (
+		<div className="h-screen flex flex-col  overflow-hidden">
+			<div className="w-full flex flex-row py-2">
+				<Link href="/blog" className="flex flex-row items-center p-2 gap-1">
+					<BookIcon className="w-4 h-4" />
+					Blog
+				</Link>
+			</div>
+			<main className="flex-grow flex flex-col items-center justify-center p-4">
+				<div className="w-full max-w-6xl flex md:flex-row items-center flex-col">
+					<div className="w-full md:w-2/3 pr-8 relative">
+						<motion.div
+							initial={{ opacity: 0, y: -50 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5 }}
+							className="mb-8 flex justify-center perspective-1000 relative"
+							style={{
+								rotateX: springX,
+								rotateY: springY,
+								transformStyle: "preserve-3d",
+							}}
+							onClick={() => setIsMenuOpen(true)}
+						>
+							<motion.button>
+								<Image
+									src={profilePicture}
+									alt="Jan Hoon"
+									width={290}
+									height={290}
+									className="rounded-full shadow-lg w-[290px] h-[290px]"
+									style={{ transform: "translateZ(40px)" }}
+								/>
+							</motion.button>
+							<div className="absolute inset-0 z-10">
+								<RadialMenu
+									activeTab={activeTab}
+									setActiveTab={setActiveTab}
+									isOpen={isMenuOpen}
+									setIsOpen={setIsMenuOpen}
+								/>
+							</div>
+						</motion.div>
+						<motion.h1
+							initial={{ opacity: 0, y: -50 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, delay: 0.2 }}
+							className="text-4xl font-bold mb-2 text-center"
+						>
+							Jan Hoon
+						</motion.h1>
+						<motion.h2
+							initial={{ opacity: 0, y: 50 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, delay: 0.4 }}
+							className="text-2xl mb-8 text-center"
+						>
+							Data & Platform Engineer
+						</motion.h2>
+					</div>
+					<div className="w-full md:w-1/3 lg:w-1/2 pl-8">
+						<AnimatePresence mode="wait">
+							<motion.div
+								key={activeTab}
+								initial={{ opacity: 0, x: -100 }}
+								animate={{ opacity: 1, x: 0 }}
+								exit={{ opacity: 0, x: 100 }}
+								transition={{ duration: 0.3 }}
+								className="w-full"
+							>
+								{activeTab === "about" && (
+									<p className="text-center">
+										Hi, I&apos;m Jan Hoon, a passionate Data & Platform
+										Engineer. I love working with data and building robust
+										platforms to drive insights and innovation.
+									</p>
+								)}
+								{activeTab === "blog" && <BlogPreview />}
+								{activeTab === "projects" && <ProjectShowcase />}
+							</motion.div>
+						</AnimatePresence>
+					</div>
+				</div>
+			</main>
+			<SocialLinks />
+		</div>
+	);
 }
