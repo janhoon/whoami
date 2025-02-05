@@ -114,7 +114,7 @@ export default function Cadac() {
 				takes to build a data-driven products and teams.
 			</p>
 			<BlogH2>CADAC</BlogH2>
-			<p className="w-2/3">
+			<p>
 				Where do we start? Well most of these data frameworks and concepts mean
 				nothing if the business doesn&apos;t have confidence and trust in the
 				data provided. We&apos;ll get into how ownership and data quality
@@ -123,7 +123,7 @@ export default function Cadac() {
 				<span className="font-bold">Complete</span>.
 			</p>
 			<BlogH3>Complete</BlogH3>
-			<p className="w-2/3">
+			<p>
 				By completeness in data we implied that we cannot build trust and
 				confidence on weak foundations. This foundation is what we build our
 				businesses and products on and should maintain a high level of quality.
@@ -132,12 +132,12 @@ export default function Cadac() {
 				&quot;data-driven&quot; or &quot;data mesh&quot; or whatever you are
 				aiming for.
 			</p>
-			<p className="w-2/3">
+			<p>
 				So how do we ensure completeness? For me there are 5 key areas of focus
 				for completeness:
 			</p>
 			<BlogH4>1. Raw Source Data</BlogH4>
-			<p className="w-2/3">
+			<p>
 				Raw source data should always be the starting point. Insights and value
 				will not necerily only come from the places you expect to find them,
 				thus you always keep an eye on your source data, both reviewing the data
@@ -145,7 +145,7 @@ export default function Cadac() {
 				So then, what does raw source data even mean? Well, anything, but
 				let&apos;s go into some examples:
 			</p>
-			<ul className="flex flex-col list-disc list-outside pt-2 pl-8 gap-2 w-2/3">
+			<ul className="flex flex-col list-disc list-outside pt-2 pl-8 gap-2">
 				<li>
 					<span className="font-bold">Databases:</span> This seems like a
 					no-brainer, but don&apos;t just think of databases within you business
@@ -202,19 +202,24 @@ export default function Cadac() {
 					opportunities in your own business.
 				</li>
 			</ul>
-			<p className="w-2/3">
+			<p>
 				Be creative and make sure you have the data necessary to make the right
 				decisions.
 			</p>
 			<BlogH4>2. ETL, ELT or whatever you want to call it</BlogH4>
-			<p className="w-2/3">
-				You&apos;ve selected your sources and have setup some ETL service to
-				pull all of the data into a central location, but the job is not done.
-				To build trust on the completeness of you data, you need to not just
-				cover a wide range of data, but cover a wide range, without losing any
-				data in the moving process.
+			<p>
+				You&apos;ve selected your sources and have setup some data integrations
+				service to pull all of the data into a central location, but the job is
+				not done. To build trust on the completeness of you data, you need to
+				not just cover a wide range of data, but cover a wide range, without
+				losing any data in the moving process.
 			</p>
-			<div className="w-full h-[600px]" />
+			<BlogH4>3. User Generated Data</BlogH4>
+			<p>
+				User generated data is data that is created by users of your product.
+				This could be data such as user feedback, user actions, user
+				interactions or any other data that is created by users.
+			</p>
 			<BlogFooter
 				author="Jan Hoon"
 				about="Data & Platform Engineer"
