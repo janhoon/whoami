@@ -1,13 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import {
-	motion,
-	AnimatePresence,
-	useMotionValue,
-	useSpring,
-	useTransform,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import SocialLinks from "../components/SocialLinks";
 import BlogPreview from "../components/BlogPreview";
 import ProjectShowcase from "../components/ProjectShowcase";
@@ -26,18 +20,6 @@ export default function Home() {
 	const [lastScrollTime, setLastScrollTime] = useState(0);
 	const [scrollAccumulator, setScrollAccumulator] = useState(0);
 
-	const x = useMotionValue(0);
-	const y = useMotionValue(0);
-
-	const height = 10;
-
-	const rotateX = useTransform(y, [300, -300], [height, -height]);
-	const rotateY = useTransform(x, [300, -300], [-height, height]);
-
-	const springConfig = { stiffness: 3000, damping: 30 };
-	const springX = useSpring(rotateX, springConfig);
-	const springY = useSpring(rotateY, springConfig);
-
 	const changeTab = useCallback(
 		(direction: "next" | "prev") => {
 			const currentIndex = tabs.indexOf(activeTab);
@@ -55,30 +37,14 @@ export default function Home() {
 	);
 
 	useEffect(() => {
-		const handleMouseMove = (event: MouseEvent) => {
-			const centerX = window.innerWidth / 2;
-			const centerY = window.innerHeight / 2;
-			x.set(event.clientX - centerX);
-			y.set(event.clientY - centerY);
-		};
-
-		window.addEventListener("mousemove", handleMouseMove);
-
-		return () => {
-			window.removeEventListener("mousemove", handleMouseMove);
-		};
-	}, [x, y]);
-
-	useEffect(() => {
 		const handleWheel = (event: WheelEvent) => {
 			const now = Date.now();
 			if (now - lastScrollTime < 500) {
-				// Accumulate scroll within the throttle window
 				setScrollAccumulator((prev) => prev + event.deltaY);
 				return;
 			}
 
-			const threshold = 300; // Adjust this value to require more/less scrolling
+			const threshold = 300;
 			const newAccumulator = scrollAccumulator + event.deltaY;
 
 			if (Math.abs(newAccumulator) >= threshold) {
@@ -88,7 +54,7 @@ export default function Home() {
 				} else {
 					changeTab("prev");
 				}
-				setScrollAccumulator(0); // Reset accumulator after changing tab
+				setScrollAccumulator(0);
 			} else {
 				setScrollAccumulator(newAccumulator);
 			}
@@ -99,7 +65,7 @@ export default function Home() {
 	}, [lastScrollTime, scrollAccumulator, changeTab]);
 
 	return (
-		<div className="h-screen flex flex-col  overflow-hidden">
+		<div className="h-screen flex flex-col overflow-hidden">
 			<div className="w-full flex flex-row py-4 px-4">
 				<Link
 					href="/blog"
@@ -116,12 +82,7 @@ export default function Home() {
 							initial={{ opacity: 0, y: -50 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5 }}
-							className="mb-8 flex justify-center perspective-1000 relative"
-							style={{
-								rotateX: springX,
-								rotateY: springY,
-								transformStyle: "preserve-3d",
-							}}
+							className="mb-8 flex justify-center relative"
 							onClick={() => setIsMenuOpen(true)}
 						>
 							<motion.button>
@@ -131,7 +92,6 @@ export default function Home() {
 									width={290}
 									height={290}
 									className="rounded-full shadow-lg w-[290px] h-[290px]"
-									style={{ transform: "translateZ(40px)" }}
 									priority
 								/>
 							</motion.button>
