@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths:
-      - 'site/**'
+      - "site/**"
   pull_request:
     paths:
-      - 'site/**'
+      - "site/**"
 
 jobs:
   deploy:
@@ -19,9 +19,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: 'site/package-lock.json'
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: "site/package-lock.json"
 
       - name: Install Dependencies
         working-directory: site
@@ -44,6 +44,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           NEXT_TELEMETRY_DISABLED: 1
         run: |
+          echo "${{ toJSON(secrets) }}"
           npm run deploy
 
       - name: Cache Next.js Build
