@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} ${jetbrainsMono.variable} tialiased bg-gray-800 text-gray-100`}
+        className={`${roboto.className} ${jetbrainsMono.variable} antialiased bg-gray-800 text-gray-100`}
       >
         {children}
       </body>
