@@ -10,9 +10,48 @@ import Image from "next/image";
 import profilePicture from "@/images/pfp.jpg";
 import Link from "next/link";
 import { ArrowRightIcon, BookIcon } from "lucide-react";
-
+import {
+  SiKubernetes,
+  SiDatabricks,
+  SiReact,
+  SiGrafana,
+  SiDocker,
+  SiAmazonwebservices,
+  SiGooglecloud,
+  SiGo,
+  SiPython,
+  SiTypescript,
+  SiTerraform,
+} from "react-icons/si";
+import { FaCode, FaSnowflake } from "react-icons/fa";
+import { VscAzure } from "react-icons/vsc";
+import { Badge } from "@/components/ui/badge";
 // Move tabs outside component
 const tabs = ["about", "blog", "projects"];
+
+const skillData = [
+  { name: "Kubernetes", value: 70, icon: <SiKubernetes className="w-4 h-4" /> },
+  { name: "Databricks", value: 80, icon: <SiDatabricks className="w-4 h-4" /> },
+  { name: "React", value: 50, icon: <SiReact className="w-4 h-4" /> },
+  { name: "Observability", value: 40, icon: <SiGrafana className="w-4 h-4" /> },
+  {
+    name: "Software Engineering",
+    value: 60,
+    icon: <FaCode className="w-4 h-4" />,
+  },
+];
+
+const otherSkills = [
+  { name: "Docker", icon: <SiDocker className="w-4 h-4" /> },
+  { name: "Snowflake", icon: <FaSnowflake className="w-4 h-4" /> },
+  { name: "AWS", icon: <SiAmazonwebservices className="w-4 h-4" /> },
+  { name: "Azure", icon: <VscAzure className="w-4 h-4" /> },
+  { name: "GCP", icon: <SiGooglecloud className="w-4 h-4" /> },
+  { name: "Go", icon: <SiGo className="w-4 h-4" /> },
+  { name: "Python", icon: <SiPython className="w-4 h-4" /> },
+  { name: "TypeScript", icon: <SiTypescript className="w-4 h-4" /> },
+  { name: "Terraform", icon: <SiTerraform className="w-4 h-4" /> },
+];
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("about");
@@ -33,7 +72,7 @@ export default function Home() {
 
       setActiveTab(tabs[newIndex]);
     },
-    [activeTab],
+    [activeTab]
   );
 
   useEffect(() => {
@@ -76,7 +115,7 @@ export default function Home() {
         </Link>
       </div>
       <main className="flex-grow flex flex-col items-center justify-center p-4">
-        <div className="w-full max-w-6xl flex md:flex-row items-center flex-col">
+        <div className="w-full max-w-6xl flex lg:flex-row items-center flex-col">
           <div className="w-full md:w-2/3 pr-8 relative">
             <motion.div
               initial={{ opacity: 0, y: -50 }}
@@ -121,7 +160,7 @@ export default function Home() {
               Data & Platform Engineer
             </motion.h2>
           </div>
-          <div className="w-full md:w-1/3 lg:w-1/2 pl-8">
+          <div className="w-full lg:w-1/3 pl-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -132,11 +171,37 @@ export default function Home() {
                 className="w-full"
               >
                 {activeTab === "about" && (
-                  <p className="text-center">
-                    Hi, I&apos;m Jan Hoon, a passionate Data & Platform
-                    Engineer. I love working with data and building robust
-                    platforms to drive insights and innovation.
-                  </p>
+                  <div>
+                    <h2 className="text-2xl font-bold my-4">About Me</h2>
+                    <p>
+                      Hi, I&apos;m Jan, a passionate Data & Platform Engineer. I
+                      love working with data and building robust platforms to
+                      drive insights and innovation.
+                    </p>
+                    <h2 className="text-2xl font-bold my-4">Skills</h2>
+                    <div className="flex flex-col gap-2 w-full">
+                      {skillData.map((skill) => (
+                        <motion.div
+                          key={skill.name}
+                          className="flex flex-row items-center gap-2 bg-green-700 py-1 px-2 rounded-md"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${skill.value}%` }}
+                        >
+                          {skill.icon}
+                          <p>{skill.name}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                    <h2 className="text-lg font-bold my-4">Other Skills</h2>
+                    <div className="flex flex-row flex-wrap gap-2 w-full">
+                      {otherSkills.map((skill) => (
+                        <Badge key={skill.name} className="gap-2 bg-gray-900">
+                          {skill.icon}
+                          {skill.name}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
                 )}
                 {activeTab === "blog" && (
                   <div>
