@@ -33,6 +33,11 @@ jobs:
         working-directory: site
         run: npm test --if-present
 
+      - name: Lint
+        if: github.event_name == 'pull_request'
+        working-directory: site
+        run: npm run lint
+
       - name: Build and Deploy to Cloudflare Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         working-directory: site
