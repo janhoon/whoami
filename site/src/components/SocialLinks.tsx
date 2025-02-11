@@ -1,12 +1,15 @@
-import { motion } from "framer-motion"
-import { Github, Linkedin, Twitter } from "lucide-react"
+import { motion } from "framer-motion";
+import { Github, Linkedin, Twitter } from "lucide-react";
 
 export default function SocialLinks() {
   const socialLinks = [
-    { icon: <Linkedin size={24} />, url: "https://www.linkedin.com/in/janhoon" },
+    {
+      icon: <Linkedin size={24} />,
+      url: "https://www.linkedin.com/in/janhoon",
+    },
     { icon: <Twitter size={24} />, url: "https://twitter.com/janhoon" },
     { icon: <Github size={24} />, url: "https://github.com/janhoon" },
-  ]
+  ];
 
   return (
     <motion.div
@@ -29,6 +32,5 @@ export default function SocialLinks() {
         </motion.a>
       ))}
     </motion.div>
-  )
+  );
 }
-
