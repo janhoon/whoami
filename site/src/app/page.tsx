@@ -104,7 +104,7 @@ export default function Home() {
   }, [lastScrollTime, scrollAccumulator, changeTab]);
 
   return (
-    <div className="h-screen flex flex-col overflow-scroll">
+  <div className="min-h-screen flex flex-col">
       <div className="w-full flex flex-row py-4 px-4">
         <Link
           href="/blog"
