@@ -110,8 +110,19 @@ export default function Cadac() {
         of data, but without losing any data in the moving process.
       </p>
       <p>
-        One way to improve the trust in your data completeness is to run period
-        checks comparing the source data with the data in you data warehouse.
+        One way to improve the trust in your data completeness is to run
+        periodic checks comparing the source data with the data in you data
+        warehouse, making sure there are no discrepancies. There are many ways
+        of doing this, examples include: doing a sum of a numeric column and
+        comparing it to the source, checking for missing values, checking for
+        duplicates, ensuring same number of rows, etc.
+      </p>
+      <p>
+        When you do find any discrepancies, you need to have a process in place
+        to notify both those responsible for the data, but also those who are
+        using it. Building trust on completeness of your data means having open
+        lines of communication and transparency in your data with your data
+        &quot;customers&quot;.
       </p>
       <BlogFooter
         author="Jan Hoon"
