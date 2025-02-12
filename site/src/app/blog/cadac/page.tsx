@@ -6,54 +6,7 @@ import BlogH3 from "@/components/BlogH3";
 import BlogH4 from "@/components/BlogH4";
 import BlogTitle from "@/components/BlogTitle";
 
-// type Rect = {
-// 	top: number;
-// 	left: number;
-// 	width: number;
-// 	height: number;
-// };
-
-// const chartData = [{ month: "Complete", desktop: 186, mobile: 80 }];
-
-// const chartConfig = {
-// 	desktop: {
-// 		label: "Desktop",
-// 		color: "hsl(var(--chart-1))",
-// 	},
-// 	mobile: {
-// 		label: "Mobile",
-// 		color: "hsl(var(--chart-2))",
-// 	},
-// 	label: {
-// 		color: "hsl(var(--background))",
-// 	},
-// } satisfies ChartConfig;
-
-// const chartInitialRect: Rect = {
-// 	top: (33 / 100) * window.innerHeight,
-// 	left: (62 / 100) * window.innerWidth,
-// 	width: (22 / 100) * window.innerWidth,
-// 	height: 300,
-// };
-
 export default function Cadac() {
-  // refs
-  // const chartRef = useRef<HTMLDivElement>(null);
-
-  // scroll listeners
-  // const { scrollYProgress: completeScrollYProgress } = useScroll({
-  // 	target: completeRef,
-  // 	offset: ["start end", "end center"],
-  // });
-  // const { scrollYProgress: completeInteractScrollYProgress } = useScroll({
-  // 	target: completeInteractRef,
-  // 	offset: ["start end", "start start"],
-  // });
-
-  // state
-
-  // show chart when complete section is in view
-
   return (
     <div className="flex flex-col items-start justify-start w-full gap-6 sm:text-2xl text-lg">
       <BlogTitle
@@ -61,75 +14,45 @@ export default function Cadac() {
         date="2025-01-27"
         author={{ name: "Jan Hoon", url: "https://janhoon.com" }}
       />
-      {/* <AnimatePresence>
-				<motion.div
-					ref={chartRef}
-					animate={{
-						opacity: 1,
-						x: 0,
-						y: 0,
-					}}
-					initial={{ opacity: 0, x: 0, y: -20 }}
-					exit={{ opacity: 0, x: 0, y: -20 }}
-					className="bg-gray-900 p-4 fixed flex flex-col"
-				>
-					<span className="text-white text-lg font-bold">CADAC Tracker</span>
-					<ChartContainer config={chartConfig} className="w-full h-[300px]">
-						<BarChart data={chartData} layout="vertical">
-							<YAxis dataKey="month" type="category" hide />
-							<XAxis dataKey="desktop" hide type="number" />
-							<Bar dataKey="desktop" fill="#16a34a" barSize={40}>
-								<LabelList
-									dataKey="month"
-									position="insideLeft"
-									fill="#fff"
-									fontSize={14}
-									fontWeight={600}
-								/>
-							</Bar>
-						</BarChart>
-					</ChartContainer>
-				</motion.div>
-			</AnimatePresence> */}
       <BlogH2>Introduction</BlogH2>
       <p>
         So, you&apos;ve been reading about data quality, data governance, data
         mesh and data fabric and not quite sure where to start when working with
-        data at your company. Some of these concepts contain guidelines our
-        outline principles that can help you get started, but in a previous team
-        I worked with we found that these principles were not enough to get
-        started and did not provide any clear direction.
+        data at your company. These concepts contain guidelines or principles
+        that can help you reach a goal, but in a previous team we found that
+        although these principles share some common themes they do not provide a
+        lot of direction. So we decided to distill them into something more
+        measurable and actionable.
       </p>
       <p>
-        Our team held a workshop with some friendly competition to see who could
-        come up with some proposals for how we could continue to expand and
+        We held a workshop with some friendly competition to see who could come
+        up with the best proposal for how we could continue to expand and
         improve on our data platform. As part of this workshop we sat down and
         got to thinking,
-        <span className="italic">what does improving actually mean</span>? So we
-        sat as a team of 30+ people, data engineers, data analysts, data
-        scientists, analytics engineers and started to brainstorm.
+        <span className="italic"> what does improving actually mean</span>?
       </p>
       <p>
         Throughout this blog post we&apos;ll be interactively exploring what it
-        takes to build a data-driven products and teams.
+        takes to build a data-driven products and teams using CADAC, a way of
+        ensuring focus is directed in the right areas when building your data
+        products or teams
       </p>
       <BlogH2>CADAC</BlogH2>
       <p>
-        Where do we start? Well most of these data frameworks and concepts mean
-        nothing if the business doesn&apos;t have confidence and trust in the
-        data provided. We&apos;ll get into how ownership and data quality
-        discussion a bit deeper later on, but for now we just need to focus on
-        direction. So first letter of our acronym was defined:{" "}
-        <span className="font-bold">Complete</span>.
+        Any data frameworks and/or concepts mean nothing if the business
+        doesn&apos;t have confidence and trust in the data provided. We&apos;ll
+        get into how ownership and data quality discussion a bit deeper later
+        on, but for now we just need to focus on direction. So first letter of
+        our acronym was defined: <span className="font-bold">Complete</span>.
       </p>
       <BlogH3>Complete</BlogH3>
       <p>
         By completeness in data we implied that we cannot build trust and
         confidence on weak foundations. This foundation is what we build our
-        businesses and products on and should maintain a high level of quality.
-        If your data is not complete or lacking any value, you&apos;re not going
-        to be able to build the trust and confidence you need to acheive
-        &quot;data-driven&quot; or &quot;data mesh&quot; or whatever you are
+        businesses and products on and should reliable and broad. If your data
+        is not complete or lacking any information, you&apos;re not going to be
+        able to build the trust and confidence you need to achieve
+        &quot;data-driveness&quot; or &quot;data mesh&quot; or whatever you are
         aiming for.
       </p>
       <p>
@@ -139,7 +62,7 @@ export default function Cadac() {
       <BlogH4>1. Raw Source Data</BlogH4>
       <p>
         Raw source data should always be the starting point. Insights and value
-        will not necerily only come from the places you expect to find them,
+        will not necessarily only come from the places you expect to find them,
         thus you always keep an eye on your source data, both reviewing the data
         you already have as well as finding new sources to grow you foundation.
         So then, what does raw source data even mean? Well, anything, but
@@ -164,12 +87,12 @@ export default function Cadac() {
         <li>
           <span className="font-bold">API:</span> Firstly, no, this does not
           mean you should integrate the database behind your APIs. APIs
-          generally contain tonnes of valueble data, if you set them up
+          generally contain tonnes of valuable data, if you set them up
           correctly. When building APIs you should always think about what data
           you could track regarding the API usage and not just the data it
           generates via interactions with your users. Rather think of metrics
           such as RPS (requests per seconds) or rate limits imposed on clients.
-          These can provide powerfull information regarding how and when your
+          These can provide powerful information regarding how and when your
           users are using your services and could teach you a lot about what is
           the best times to reach out to them, or maybe you have a larger
           customer hitting your rate limits and you can now offer them a better
@@ -178,13 +101,13 @@ export default function Cadac() {
         <li>
           <span className="font-bold">Logs:</span> This is a bit more tricky and
           depending on your industry could require a bit more effort, but logs
-          are increadably powerful. Engineering and ops teams will often use
+          are incredibly powerful. Engineering and ops teams will often use
           logs to find issues within system, but as the data person you have a
           unique opportunity to use these logs to find insights. Think of logs
           as a &quot;semi&quot; structured list of events you customers perform.
           If you can figure out from a list of log lines what lines are the same
           users, you can start picking up on usage patterns and more commonly
-          viewed featers, without the users ever having to input any new data.
+          viewed features, without the users ever having to input any new data.
           If a GET request is made, we usually don&apos;t get this information
           from a database.
         </li>
