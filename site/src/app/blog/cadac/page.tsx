@@ -124,6 +124,11 @@ export default function Cadac() {
         lines of communication and transparency in your data with your data
         &quot;customers&quot;.
       </p>
+      <BlogH3>Accuracy</BlogH3>
+      <p>
+        In this section we will measure accuracy of the data you have now
+        collected.
+      </p>
       <BlogFooter
         author="Jan Hoon"
         about="Data & Platform Engineer"
