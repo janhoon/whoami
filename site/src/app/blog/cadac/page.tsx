@@ -56,7 +56,7 @@ export default function Cadac() {
         aiming for.
       </p>
       <p>
-        So how do we ensure completeness? For me there are 5 key areas of focus
+        So how do we ensure completeness? I have 5 key areas of focus
         for completeness:
       </p>
       <BlogH4>1. Raw Source Data</BlogH4>

@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function SocialLinks() {
   const socialLinks = [
     {
-      icon: <Linkedin size={24} />,
+      icon: <FaLinkedin size={24} />,
       url: "https://www.linkedin.com/in/janhoon",
     },
-    { icon: <Twitter size={24} />, url: "https://twitter.com/janhoon" },
-    { icon: <Github size={24} />, url: "https://github.com/janhoon" },
+    { icon: <FaGithub size={24} />, url: "https://github.com/janhoon" },
+    { icon: <FaXTwitter size={24} />, url: "https://twitter.com/janhoon" },
   ];
 
   return (

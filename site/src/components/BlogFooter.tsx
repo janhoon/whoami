@@ -2,12 +2,9 @@ import BuyMeACoffee from "./BuyMeACoffee";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import {
-  ArrowLeftIcon,
-  GithubIcon,
-  LinkedinIcon,
-  TwitterIcon,
-} from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function BlogFooter({
   author,
@@ -31,8 +28,8 @@ export default function BlogFooter({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-between w-full gap-4",
-        className,
+        "flex flex-col items-center justify-between w-full gap-4 py-4",
+        className
       )}
     >
       <div className="flex flex-row items-center justify-start bg-gray-700 rounded-lg p-4 w-full gap-4">
@@ -44,24 +41,33 @@ export default function BlogFooter({
           className="rounded-full"
           priority
         />
-        <div className="flex flex-col items-start justify-between">
+        <div className="flex flex-col items-start justify-between w-full">
           <span className="text-lg font-bold">{author}</span>
           <span className="text-sm text-gray-400">{about}</span>
         </div>
-        <div className="flex flex-col items-end justify-start w-full gap-1">
+        <div className="flex flex-col items-end justify-start gap-1">
           {githubUrl && (
-            <Link href={githubUrl} className="text-sm text-gray-400">
-              <GithubIcon className="w-4 h-4" />
+            <Link
+              href={githubUrl}
+              className="text-sm text-gray-400 hover:text-white"
+            >
+              <FaGithub className="w-6 h-6" />
             </Link>
           )}
           {linkedinUrl && (
-            <Link href={linkedinUrl} className="text-sm text-gray-400">
-              <LinkedinIcon className="w-4 h-4" />
+            <Link
+              href={linkedinUrl}
+              className="text-sm text-gray-400 hover:text-blue-500"
+            >
+              <FaLinkedin className="w-6 h-6" />
             </Link>
           )}
           {xUrl && (
-            <Link href={xUrl} className="text-sm text-gray-400">
-              <TwitterIcon className="w-4 h-4" />
+            <Link
+              href={xUrl}
+              className="text-sm text-gray-400 hover:text-white"
+            >
+              <FaXTwitter className="w-6 h-6" />
             </Link>
           )}
         </div>
