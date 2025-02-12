@@ -9,7 +9,7 @@ export default function SocialLinks() {
       url: "https://www.linkedin.com/in/janhoon",
     },
     { icon: <FaGithub size={24} />, url: "https://github.com/janhoon" },
-    { icon: <FaXTwitter size={24} />, url: "https://twitter.com/janhoon" },
+    { icon: <FaXTwitter size={24} />, url: "https://x.com/janhendrikhoon" },
   ];
 
   return (
