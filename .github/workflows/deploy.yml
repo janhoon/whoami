@@ -57,7 +57,7 @@ jobs:
           NEXT_TELEMETRY_DISABLED: 1
         run: |
           echo "${{ toJSON(secrets) }}"
-          pnpm deploy
+          pnpm run deploy
 
       - name: Cache Next.js Build
         id: cache-build
