@@ -17,7 +17,6 @@ const nextConfig = {
       },
     ];
   },
-  skipTrailingSlashRedirects: true,
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
