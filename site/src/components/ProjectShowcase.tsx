@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function ProjectShowcase() {
   const projects = [
-    { title: "Work in Progress", description: "Work in Progress" },
+    { title: "Work in Progress", description: "Work in Progress " },
   ];
 
   return (
