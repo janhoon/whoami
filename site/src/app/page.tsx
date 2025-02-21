@@ -72,7 +72,7 @@ export default function Home() {
 
       setActiveTab(tabs[newIndex]);
     },
-    [activeTab]
+    [activeTab],
   );
 
   useEffect(() => {

@@ -29,7 +29,7 @@ export default function BlogFooter({
     <div
       className={cn(
         "flex flex-col items-center justify-between w-full gap-4 py-4",
-        className
+        className,
       )}
     >
       <div className="flex flex-row items-center justify-start bg-gray-700 rounded-lg p-4 w-full gap-4">

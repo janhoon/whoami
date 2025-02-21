@@ -15,17 +15,21 @@
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
+    "@next/env": "^15.1.7",
     "@next/mdx": "^15.1.6",
+    "@swc/helpers": "^0.5.15",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.0.5",
     "lucide-react": "^0.474.0",
     "next": "15.1.6",
+    "posthog-js": "^1.222.0",
     "prettier": "^3.5.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-icons": "^5.4.0",
     "recharts": "^2.15.0",
+    "styled-jsx": "^5.1.6",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -45,5 +49,6 @@
   "overrides": {
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3"
-  }
+  },
+  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af"
 }
