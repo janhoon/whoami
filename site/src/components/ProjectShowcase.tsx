@@ -2,7 +2,12 @@ import { motion } from "framer-motion";
 
 export default function ProjectShowcase() {
   const projects = [
-    { title: "Work in Progress", description: "Work in Progress" },
+    {
+      title: "CADAC SQL Visualizer",
+      description:
+        "A SQL syntax tree visualizer that allows users to visualize and understand the structure of SQL queries.",
+      url: "https://sql.janhoon.com",
+    },
   ];
 
   return (
@@ -11,14 +16,16 @@ export default function ProjectShowcase() {
       <div className="space-y-4">
         {projects.map((project, index) => (
           <motion.div
-            key={index}
+            key={project.title}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
             className="p-4 rounded border-b last:border-b-0"
           >
-            <h4 className="font-bold">{project.title}</h4>
-            <p className="text-sm text-gray-600">{project.description}</p>
+            <a href={project.url} className="hover:text-green-500">
+              <h4 className="font-bold">{project.title}</h4>
+              <p className="text-sm text-gray-600">{project.description}</p>
+            </a>
           </motion.div>
         ))}
       </div>
