@@ -129,6 +129,13 @@ export default function Cadac() {
         In this section we will measure accuracy of the data you have now
         collected.
       </p>
+
+      <BlogH3>Completeness</BlogH3>
+      <p>
+        Well this blog post is incomplete so don't pay too much attention here
+        yet. Let me know if you'd like to see more.
+      </p>
+
       <BlogFooter
         author="Jan Hoon"
         about="Data & Platform Engineer"
