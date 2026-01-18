@@ -56,4 +56,11 @@
       ],
     },
   ],
+  "d1_databases": [
+    {
+      "binding": "NEXT_TAG_CACHE_D1",
+      "database_id": "e1447929-d06d-4453-a332-b63ad8e63319",
+      "database_name": "portfolio",
+    },
+  ],
 }
