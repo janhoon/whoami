@@ -1,28 +1,19 @@
-import cache from "@opennextjs/cloudflare/kvCache";
+import { defineCloudflareConfig } from "@opennextjs/cloudflare";
+import r2IncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/r2-incremental-cache";
+import d1NextTagCache from "@opennextjs/cloudflare/overrides/tag-cache/d1-next-tag-cache";
+import doQueue from "@opennextjs/cloudflare/overrides/queue/do-queue";
+//import { withFilter, softTagFilter } from "@opennextjs/cloudflare/overrides/tag-cache/tag-cache-filter";
 
-const config = {
-  default: {
-    override: {
-      wrapper: "cloudflare-node",
-      converter: "edge",
-      incrementalCache: async () => cache,
-      tagCache: "dummy",
-      queue: "dummy",
-    },
-  },
-
-  middleware: {
-    external: true,
-    override: {
-      wrapper: "cloudflare-edge",
-      converter: "edge",
-      proxyExternalRequest: "fetch",
-    },
-  },
-
-  dangerous: {
-    enableCacheInterception: false,
-  },
-};
-
-export default config;
+export default defineCloudflareConfig({
+  incrementalCache: r2IncrementalCache,
+  queue: doQueue,
+  // This is only required if you use On-demand revalidation
+  tagCache: d1NextTagCache,
+  //If you don't use `revalidatePath`, you can also filter internal soft tags using the `softTagFilter`
+  // tagCache: withFilter({
+  //   tagCache: d1NextTagCache,
+  //   filterFn: softTagFilter,
+  // }),
+  // Disable this if you want to use PPR
+  enableCacheInterception: true,
+});
