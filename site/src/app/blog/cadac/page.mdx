@@ -1,0 +1,111 @@
+import BlogTitle from "@/components/BlogTitle";
+import BlogFooter from "@/components/BlogFooter";
+
+<BlogTitle
+  title="CADAC: A guide to building data-driven products and teams as a data person"
+  date="2025-09-01"
+  author={{ name: "Jan Hoon", url: "<https://janhoon.com>" }}
+/>
+
+So, You’ve Been Reading About Data Quality, Data Governance, Data Mesh, And
+Data Fabric, And Not Quite Sure Where To Start When Working With Data At Your
+Company. These Concepts Contain Guidelines Or Principles That Can Help You Reach
+A Goal. In A Previous Team, We Found That Although These Principles Share Some
+Common Themes, They Do Not Provide A Lot Of Direction. So, We Decided To Distill
+Them Into Something More Measurable And Actionable.
+
+We Held A Workshop With Some Friendly Competition To See Who Could Come Up With
+The Best Proposal For How We Could Continue To Expand And Improve On Our Data Platform.
+As Part Of This Workshop, We Sat Down And Got To Thinking, _What Does Improving
+Actually Mean_?
+
+Throughout This Blog Post, We’ll Be Interactively Exploring What It Takes To Build
+Data-Driven Products And Teams Using CADAC, A Way Of Ensuring Focus Is Directed
+In The Right Areas When Building Your Data Products Or Teams.
+
+## CADAC
+
+Any Data Frameworks And/Or Concepts Mean Nothing If The Business Doesn’t Have Confidence
+And Trust In The Data Provided. We’ll Get Into How Ownership And Data Quality Discussion
+A Bit Deeper Later On, But For Now We Just Need To Focus On Direction. So, The First
+Letter Of Our Acronym Was Defined: **Complete**.
+
+## Complete
+
+By Completeness In Data, We Implied That We Cannot Build Trust And Confidence On
+weak Foundations. This Foundation Is What We Build Our Businesses And Products
+On, And Should Be Reliable And Broad. If Your Data Is Not Complete Or Lacking
+Any Information, You’re Not Going To Be Able To Build The Trust And Confidence
+You Need To Achieve “Data-Drivenness,” “Data Mesh,” Or Whatever You Are Aiming For.
+
+So, How Do We Ensure Completeness? Here Are My Two Key Areas/Sources For Getting
+Data:
+
+### 1. Business and Application Data
+
+This Should Be The Starting Point. Insights And Value Will Not Necessarily Only Come
+From The Places You Expect To Find Them. Thus, You Should Always Keep An Eye On
+Your Own Data, Both Reviewing The Data You Already Have As Well As Finding New
+Sources To Grow Your Foundation. But What Do I Mean By Business And Application
+Data? Let’s Go Through Some Examples:
+
+<div className="pl-4 mb-3">
+
+- **Databases and Data Stores**: Your services and applications will generate
+  data as they are used. Don’t just use the tables you think are
+  useful—bring everything, even if you don’t need all of it at first. Also
+  revise and update your databases to match your needs. If there is something
+  you can track and store to follow an experiment or new feature, do it and store
+  it.
+- **App Metrics**: If your business exposes APIs to customers or other services,
+  you are likely already recording metrics to track issues and performance. These
+  metrics can often tell you a lot about how your customers are using your product
+  and what they are interested in.
+- **Logs**: These are commonly used by developers to find issues and bugs in
+  services, but they can also be used to track user behavior and other patterns in
+  how your services are used.
+- **External Data Providers**: Find data providers that can give you insights into
+  your customers, your market, or competitors. This can be used to both enrich and
+  benchmark your own business as you grow.
+
+</div>
+
+Be Creative And Make Sure You Are Generating The Data Necessary To Make The Right
+Decisions.
+
+### 2. ELT, ETL Or Whatever You Want To Call It
+
+You’ve Selected Your Sources And Have Set Up Some Data Integration Service To
+Pull All Of The Data Into A Central Location—Be It Snowflake, Databricks, Or
+Excel—But The Job Is Not Done. To Build Trust In The Completeness Of Your
+Data, You Need To Not Just Cover A Wide Range Of Data, But Be Able To Ensure How
+Complete The Datasets Are.
+
+One Way To Improve The Trust In Your Data Completeness Is To Run Periodic Checks
+Comparing The Source Data With The Data In Your Data Warehouse, Making Sure
+There Are No Discrepancies. There Are Many Ways Of Doing This. Examples Include:
+Doing A Sum Of A Numeric Column And Comparing It To The Source, Checking For
+Missing Values, Checking For Duplicates, Ensuring The Same Number Of Rows, Etc.
+
+When You Do Find Any Discrepancies, You Need To Have A Process In Place To
+Notify Both Those Responsible For The Data And Those Who Are Using It. Building
+Trust In The Completeness Of Your Data Means Having Open Lines Of Communication
+And Transparency With Your “Data Customers.”
+
+## Acccurate
+
+## Discoverable
+
+## Actionable
+
+## Compliant
+
+<BlogFooter
+  author="Jan Hoon"
+  about="Data & Platform Engineer"
+  coffeeSlug="janhoon"
+  imageUrl="https://github.com/janhoon.png"
+  githubUrl="https://github.com/janhoon"
+  linkedinUrl="https://www.linkedin.com/in/janhoon"
+  xUrl="https://x.com/janhendrikhoon"
+/>

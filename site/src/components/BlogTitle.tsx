@@ -11,7 +11,7 @@ export default function BlogTitle({
 }) {
   return (
     <div className="flex flex-col items-start justify-between w-full">
-      <h1 className="text-4xl md:text-6xl font-bold mb-4">{title}</h1>
+      <h1 className="text-4xl font-bold mb-4">{title}</h1>
       <Link href={author.url} className="text-lg text-gray-400">
         by{" "}
         <span className="font-bold text-xl text-green-600 hover:text-green-500 hover:underline">
