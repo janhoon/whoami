@@ -1,56 +1,36 @@
 {
-  "name": "my-next-app",
+  "name": "whoami",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write .",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "preview": "opennextjs-cloudflare && wrangler dev",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "@mdx-js/loader": "^3.1.1",
-    "@mdx-js/react": "^3.1.1",
-    "@next/env": "^16.1.3",
-    "@next/mdx": "^16.1.3",
-    "@swc/helpers": "^0.5.18",
-    "@tailwindcss/postcss": "^4.1.18",
-    "@types/mdx": "^2.0.13",
+    "@nuxt/content": "^3.5.1",
+    "@nuxt/icon": "^1.12.0",
+    "@nuxt/image": "^1.9.0",
+    "@vueuse/motion": "^2.2.6",
+    "better-sqlite3": "^12.6.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.27.0",
-    "lucide-react": "^0.562.0",
-    "next": "16.1.3",
-    "postcss": "^8.5.6",
+    "nuxt": "^3.17.2",
     "posthog-js": "^1.328.0",
-    "prettier": "^3.8.0",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "react-icons": "^5.5.0",
-    "recharts": "^3.6.0",
-    "styled-jsx": "^5.1.7",
     "tailwind-merge": "^3.4.0",
-    "tailwindcss-animate": "^1.0.7"
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260118.0",
-    "@opennextjs/cloudflare": "^1.14.9",
-    "@types/node": "^25.0.9",
-    "@types/react": "19.0.8",
-    "@types/react-dom": "19.0.3",
-    "eslint": "^9.39.2",
-    "eslint-config-next": "16.1.3",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3",
-    "wrangler": "^4.59.2"
-  },
-  "overrides": {
-    "@types/react": "19.0.8",
-    "@types/react-dom": "19.0.3"
-  },
-  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af"
+    "@nuxt/eslint": "^1.4.1",
+    "@tailwindcss/vite": "^4.1.8",
+    "prettier": "^3.8.0",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.9.3"
+  }
 }
