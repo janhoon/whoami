@@ -1,0 +1,36 @@
+# Dependencies
+node_modules
+
+# Build outputs
+.output
+.nuxt
+.nitro
+.cache
+.data
+
+# Git
+.git
+.github
+
+# Dev files
+*.md
+.eslintrc*
+.prettierrc*
+.editorconfig
+
+# IDE
+.vscode
+.idea
+.fleet
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files (build-time vars should be set in Coolify)
+.env
+.env.*
+!.env.example
+
+# Misc
+docker-compose*.yml
