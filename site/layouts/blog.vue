@@ -7,7 +7,7 @@
             <span class="text-4xl font-bold">Jan Hoon</span>
             <span class="text-2xl">blog</span>
           </NuxtLink>
-          <NuxtLink to="/" class="text-sm text-green-600">
+          <NuxtLink to="/" class="text-sm text-green-600" aria-label="Go to homepage">
             <Icon name="lucide:home" class="w-6 h-6" />
           </NuxtLink>
         </div>

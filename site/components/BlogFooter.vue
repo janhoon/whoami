@@ -29,6 +29,7 @@ defineProps<{
         <NuxtLink
           v-if="githubUrl"
           :to="githubUrl"
+          aria-label="GitHub profile"
           class="text-sm text-gray-400 hover:text-white"
         >
           <Icon name="mdi:github" class="w-6 h-6" />
@@ -36,6 +37,7 @@ defineProps<{
         <NuxtLink
           v-if="linkedinUrl"
           :to="linkedinUrl"
+          aria-label="LinkedIn profile"
           class="text-sm text-gray-400 hover:text-blue-500"
         >
           <Icon name="mdi:linkedin" class="w-6 h-6" />
@@ -43,6 +45,7 @@ defineProps<{
         <NuxtLink
           v-if="xUrl"
           :to="xUrl"
+          aria-label="X (Twitter) profile"
           class="text-sm text-gray-400 hover:text-white"
         >
           <Icon name="ri:twitter-x-fill" class="w-6 h-6" />

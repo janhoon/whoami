@@ -1,17 +1,22 @@
 <script setup lang="ts">
+defineProps<{
+  direction?: 'horizontal' | 'vertical'
+}>()
+
 const socialLinks = [
-  { icon: 'mdi:linkedin', url: 'https://www.linkedin.com/in/janhoon' },
-  { icon: 'mdi:github', url: 'https://github.com/janhoon' },
-  { icon: 'ri:twitter-x-fill', url: 'https://x.com/janhendrikhoon' },
+  { icon: 'mdi:linkedin', url: 'https://www.linkedin.com/in/janhoon', label: 'LinkedIn profile' },
+  { icon: 'mdi:github', url: 'https://github.com/janhoon', label: 'GitHub profile' },
+  { icon: 'ri:twitter-x-fill', url: 'https://x.com/janhendrikhoon', label: 'X (Twitter) profile' },
 ]
 </script>
 
 <template>
   <div
     v-motion
-    :initial="{ opacity: 0, x: 50 }"
-    :enter="{ opacity: 1, x: 0, transition: { duration: 500 } }"
-    class="fixed top-4 right-4 flex flex-col space-y-4"
+    :initial="{ opacity: 0 }"
+    :enter="{ opacity: 1, transition: { duration: 500, delay: 600 } }"
+    class="flex gap-4"
+    :class="direction === 'vertical' ? 'flex-col' : 'flex-row'"
   >
     <a
       v-for="link in socialLinks"
@@ -19,9 +24,10 @@ const socialLinks = [
       :href="link.url"
       target="_blank"
       rel="noopener noreferrer"
-      class="text-gray-100 hover:text-gray-300 hover:scale-120 active:scale-90 transition-transform"
+      :aria-label="link.label"
+      class="text-gray-400 hover:text-gray-100 hover:scale-110 active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 rounded-full p-1"
     >
-      <Icon :name="link.icon" class="w-6 h-6" />
+      <Icon :name="link.icon" class="w-5 h-5" />
     </a>
   </div>
 </template>
