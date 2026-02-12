@@ -21,13 +21,31 @@ interface Props {
 
 const { post } = Astro.props
 const { Content } = await post.render()
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description ?? 'Article by Jan Hoon',
+  datePublished: post.data.date,
+  author: {
+    '@type': 'Person',
+    name: post.data.author?.name ?? 'Jan Hoon',
+    url: post.data.author?.url ?? 'https://janhoon.com',
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `https://janhoon.com/blog/${post.slug}`,
+  },
+}
 ---
 
 <BlogLayout
   title={`${post.data.title} - Jan Hoon`}
   description={post.data.description ?? 'Blog post from Jan Hoon'}
+  schema={schema}
 >
-  <div class="w-full">
+  <article class="w-full">
     <BlogTitle
       title={post.data.title}
       date={post.data.date}
@@ -35,7 +53,7 @@ const { Content } = await post.render()
       authorUrl={post.data.author?.url ?? 'https://janhoon.com'}
     />
 
-    <div class="prose prose-invert prose-lg max-w-none mt-8">
+    <div class="prose max-w-none mt-8">
       <Content />
     </div>
 
@@ -48,5 +66,5 @@ const { Content } = await post.render()
       linkedinUrl="https://www.linkedin.com/in/janhoon"
       xUrl="https://x.com/janhoon"
     />
-  </div>
+  </article>
 </BlogLayout>

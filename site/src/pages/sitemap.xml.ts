@@ -11,6 +11,7 @@ export async function GET() {
   const urls = [
     { loc: baseUrl, lastmod: now, changefreq: 'monthly', priority: '1.0' },
     { loc: `${baseUrl}/blog`, lastmod: now, changefreq: 'weekly', priority: '0.8' },
+    { loc: `${baseUrl}/llms.txt`, lastmod: now, changefreq: 'monthly', priority: '0.5' },
     ...posts.map((post) => ({
       loc: `${baseUrl}/blog/${post.slug}`,
       lastmod: now,

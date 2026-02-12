@@ -6,6 +6,7 @@ type BlogPost = {
   id: string
   title: string
   date: string
+  description?: string
 }
 
 const props = withDefaults(
@@ -15,7 +16,7 @@ const props = withDefaults(
     limit?: number
   }>(),
   {
-    title: 'Latest Blog Posts',
+    title: 'Latest blog posts',
     limit: undefined,
   }
 )
@@ -27,24 +28,45 @@ const visiblePosts = computed(() => {
 
   return props.posts.slice(0, props.limit)
 })
+
+const dateFormatter = new Intl.DateTimeFormat('en', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+})
+
+function formatDate(date: string) {
+  const parsed = new Date(date)
+  if (Number.isNaN(parsed.getTime())) {
+    return date
+  }
+
+  return dateFormatter.format(parsed)
+}
 </script>
 
 <template>
   <div>
-    <h3 class="text-2xl font-bold mb-4">{{ props.title }}</h3>
-    <ul class="space-y-2">
+    <h3 class="text-2xl font-semibold text-slate-900 mb-4">{{ props.title }}</h3>
+    <ul class="grid gap-3">
       <li v-for="post in visiblePosts" :key="post.id">
         <a
           :href="`/blog/${post.id}`"
-          class="block p-4 rounded-lg border-b last:border-b-0 hover:bg-gray-700 w-full transition-colors"
+          class="group block p-4 rounded-2xl border border-slate-200 bg-white/80 hover:bg-white transition-colors"
         >
-          <h4 class="font-bold">{{ post.title }}</h4>
-          <div class="flex flex-row items-center justify-between">
-            <p class="text-sm text-gray-400">{{ post.date }}</p>
-            <span class="flex flex-row items-center justify-center gap-2 text-green-600 hover:underline">
-              <Icon icon="lucide:book" class="w-4 h-4" />
-              Read more
-            </span>
+          <div class="flex items-start justify-between gap-3">
+            <div class="space-y-2">
+              <p class="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">
+                {{ formatDate(post.date) }}
+              </p>
+              <h4 class="text-lg font-semibold text-slate-900 group-hover:text-teal-700 transition-colors">
+                {{ post.title }}
+              </h4>
+              <p v-if="post.description" class="text-sm leading-relaxed text-slate-600">
+                {{ post.description }}
+              </p>
+            </div>
+            <Icon icon="lucide:arrow-up-right" class="w-5 h-5 mt-1 text-slate-500 group-hover:text-teal-700 shrink-0 transition-colors" />
           </div>
         </a>
       </li>

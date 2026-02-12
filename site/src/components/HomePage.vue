@@ -1,36 +1,23 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import { nextTick, ref } from 'vue'
 import BlogPreview from './BlogPreview.vue'
 import ProjectShowcase from './ProjectShowcase.vue'
-import RadialMenu from './RadialMenu.vue'
 import SocialLinks from './SocialLinks.vue'
 
 type BlogPost = {
   id: string
   title: string
   date: string
+  description?: string
 }
 
-const props = defineProps<{
+defineProps<{
   posts: BlogPost[]
 }>()
 
-const tabs = ['about', 'blog', 'projects'] as const
-type Tab = (typeof tabs)[number]
-
-const activeTab = ref<Tab>('about')
-const isMenuOpen = ref(true)
-
-const tabMeta: Record<Tab, { label: string; icon: string }> = {
-  about: { label: 'About', icon: 'lucide:user' },
-  blog: { label: 'Blog', icon: 'lucide:file-text' },
-  projects: { label: 'Projects', icon: 'lucide:briefcase' },
-}
-
 const skillCategories = [
   {
-    name: 'Platform & Infrastructure',
+    name: 'Platform and Infrastructure',
     icon: 'lucide:server',
     skills: [
       { name: 'Kubernetes', icon: 'simple-icons:kubernetes' },
@@ -51,7 +38,7 @@ const skillCategories = [
     ],
   },
   {
-    name: 'Languages & Frameworks',
+    name: 'Languages and Frameworks',
     icon: 'lucide:code',
     skills: [
       { name: 'Go', icon: 'simple-icons:go' },
@@ -61,173 +48,165 @@ const skillCategories = [
     ],
   },
 ]
-
-function handleTabKeydown(event: KeyboardEvent) {
-  const currentIndex = tabs.indexOf(activeTab.value)
-  let newIndex = currentIndex
-
-  if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-    event.preventDefault()
-    newIndex = (currentIndex + 1) % tabs.length
-  } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-    event.preventDefault()
-    newIndex = (currentIndex - 1 + tabs.length) % tabs.length
-  }
-
-  if (newIndex !== currentIndex) {
-    activeTab.value = tabs[newIndex]
-    nextTick(() => {
-      document.getElementById(`tab-${tabs[newIndex]}`)?.focus()
-    })
-  }
-}
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col lg:flex-row">
-    <aside
-      class="relative w-full lg:w-1/3 lg:max-w-sm xl:max-w-md lg:sticky lg:top-0 lg:h-screen flex flex-col items-center p-6 lg:p-8 lg:justify-center lg:border-r lg:border-gray-700/50"
-    >
-      <div class="relative mb-4 lg:mb-6">
-        <button
-          class="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800"
-          aria-label="Toggle radial navigation menu"
-          @click="isMenuOpen = !isMenuOpen"
-        >
+  <main id="main-content" class="page-shell py-6 md:py-10">
+    <header class="section-card p-5 md:p-8 lg:p-10">
+      <div class="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+        <div class="space-y-4">
+          <span class="kicker">Data and Platform Engineer</span>
+          <h1 class="display-heading text-5xl sm:text-6xl leading-[0.95] text-slate-900">
+            Jan Hoon
+          </h1>
+          <p class="text-lg leading-relaxed text-slate-700 max-w-2xl">
+            I help teams build reliable data products, modern platform foundations,
+            and practical systems that move from concept to measurable business value.
+          </p>
+
+          <nav aria-label="Homepage sections" class="flex flex-wrap gap-2 pt-2">
+            <a href="#about" class="chip focus-ring">About</a>
+            <a href="#skills" class="chip focus-ring">Skills</a>
+            <a href="#projects" class="chip focus-ring">Projects</a>
+            <a href="#writing" class="chip focus-ring">Writing</a>
+            <a href="#agent-brief" class="chip focus-ring">Agent Brief</a>
+          </nav>
+        </div>
+
+        <div class="space-y-4">
           <img
             src="/images/pfp.jpg"
-            alt="Profile photo of Jan Hoon, Data and Platform Engineer"
-            width="200"
-            height="200"
-            class="rounded-full shadow-lg w-40 h-40 md:w-48 md:h-48 lg:w-[200px] lg:h-[200px] object-cover"
+            alt="Profile photo of Jan Hoon"
+            width="240"
+            height="240"
+            class="w-28 h-28 rounded-3xl border border-white/80 object-cover shadow-lg"
           />
-        </button>
-        <div class="absolute inset-0 z-10 hidden lg:block" aria-hidden="true">
-          <RadialMenu
-            :active-tab="activeTab"
-            :is-open="isMenuOpen"
-            @update:active-tab="activeTab = $event"
-            @update:is-open="isMenuOpen = $event"
-          />
+
+          <dl class="grid grid-cols-2 gap-2 text-sm">
+            <div class="rounded-xl border border-slate-200 bg-white/80 p-3">
+              <dt class="text-slate-500">Base</dt>
+              <dd class="font-semibold text-slate-900">Europe</dd>
+            </div>
+            <div class="rounded-xl border border-slate-200 bg-white/80 p-3">
+              <dt class="text-slate-500">Focus</dt>
+              <dd class="font-semibold text-slate-900">Data Platforms</dd>
+            </div>
+            <div class="rounded-xl border border-slate-200 bg-white/80 p-3">
+              <dt class="text-slate-500">Current role</dt>
+              <dd class="font-semibold text-slate-900">Engineer</dd>
+            </div>
+            <div class="rounded-xl border border-slate-200 bg-white/80 p-3">
+              <dt class="text-slate-500">Writes about</dt>
+              <dd class="font-semibold text-slate-900">Data Teams</dd>
+            </div>
+          </dl>
+
+          <SocialLinks />
         </div>
       </div>
+    </header>
 
-      <h1 class="text-2xl lg:text-3xl font-bold text-center">Jan Hoon</h1>
+    <div class="grid gap-6 mt-6 lg:grid-cols-[1.1fr_0.9fr]">
+      <section id="about" class="section-card p-5 md:p-8">
+        <p class="kicker mb-4">About</p>
+        <h2 class="display-heading text-3xl text-slate-900 mb-3">
+          Building data product systems teams can trust
+        </h2>
+        <p class="text-slate-700 leading-relaxed">
+          I work at the intersection of engineering, analytics, and platform design.
+          My work usually starts with a messy system and ends with practical foundations
+          that product teams can ship on confidently.
+        </p>
+        <ul class="mt-6 space-y-3 text-slate-700">
+          <li class="flex gap-3">
+            <Icon icon="lucide:check-circle-2" class="w-5 h-5 mt-0.5 text-teal-700 shrink-0" />
+            Design data platforms that are observable, dependable, and easy to operate.
+          </li>
+          <li class="flex gap-3">
+            <Icon icon="lucide:check-circle-2" class="w-5 h-5 mt-0.5 text-teal-700 shrink-0" />
+            Support product and business teams with clear data contracts and healthy pipelines.
+          </li>
+          <li class="flex gap-3">
+            <Icon icon="lucide:check-circle-2" class="w-5 h-5 mt-0.5 text-teal-700 shrink-0" />
+            Translate technical decisions into outcomes that non-engineers can measure.
+          </li>
+        </ul>
+      </section>
 
-      <h2 class="text-base lg:text-lg text-gray-400 text-center mt-1 font-mono">
-        Data &amp; Platform Engineer
-      </h2>
-
-      <nav
-        role="tablist"
-        aria-label="Content sections"
-        class="flex flex-row lg:flex-col gap-1 mt-6 lg:mt-8 w-full max-w-xs"
-        @keydown="handleTabKeydown"
-      >
-        <button
-          v-for="tab in tabs"
-          :key="tab"
-          :id="`tab-${tab}`"
-          role="tab"
-          :aria-selected="activeTab === tab"
-          :aria-controls="`panel-${tab}`"
-          :tabindex="activeTab === tab ? 0 : -1"
-          class="flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base flex-1 lg:flex-initial justify-center lg:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
-          :class="
-            activeTab === tab
-              ? 'bg-green-600/15 text-green-500 font-semibold'
-              : 'text-gray-400 hover:text-gray-200 hover:bg-gray-700/50'
-          "
-          @click="activeTab = tab"
-        >
-          <Icon :icon="tabMeta[tab].icon" class="w-4 h-4" />
-          <span>{{ tabMeta[tab].label }}</span>
-        </button>
-      </nav>
-
-      <div class="mt-6 lg:absolute lg:bottom-8">
-        <SocialLinks />
-      </div>
-    </aside>
-
-    <main class="flex-1 p-6 lg:py-12 lg:px-16" aria-live="polite">
-      <div class="max-w-2xl">
-        <Transition name="tab" mode="out-in">
-          <div
-            :key="activeTab"
-            :id="`panel-${activeTab}`"
-            role="tabpanel"
-            :aria-labelledby="`tab-${activeTab}`"
-          >
-            <div v-if="activeTab === 'about'">
-              <h2 class="text-2xl font-bold mb-4 font-mono">About Me</h2>
-              <p class="text-gray-300 leading-relaxed">
-                Hi, I'm Jan, a passionate Data &amp; Platform Engineer. I love
-                working with data and building robust platforms to drive
-                insights and innovation.
-              </p>
-
-              <h2 class="text-2xl font-bold mt-10 mb-6 font-mono">Skills</h2>
-              <div class="space-y-8">
-                <div
-                  v-for="category in skillCategories"
-                  :key="category.name"
-                >
-                  <h3
-                    class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2"
-                  >
-                    <Icon :icon="category.icon" class="w-3.5 h-3.5" />
-                    {{ category.name }}
-                  </h3>
-                  <div class="flex flex-wrap gap-2">
-                    <span
-                      v-for="skill in category.skills"
-                      :key="skill.name"
-                      class="inline-flex items-center gap-2 bg-gray-700/50 hover:bg-gray-700 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-200 transition-colors"
-                    >
-                      <Icon :icon="skill.icon" class="w-4 h-4 text-green-500 shrink-0" />
-                      <span class="font-mono text-sm">{{ skill.name }}</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div v-else-if="activeTab === 'blog'">
-              <BlogPreview :posts="props.posts" :limit="3" />
-              <a
-                href="/blog"
-                class="inline-flex items-center gap-1 text-green-500 hover:text-green-400 mt-4 transition-colors"
-                aria-label="View all blog posts"
-              >
-                View All
-                <Icon icon="lucide:arrow-right" class="w-4 h-4" />
-              </a>
-            </div>
-
-            <div v-else-if="activeTab === 'projects'">
-              <ProjectShowcase />
-            </div>
+      <section id="agent-brief" class="section-card p-5 md:p-8">
+        <p class="kicker mb-4">For agents</p>
+        <h2 class="display-heading text-3xl text-slate-900 mb-3">Machine-readable brief</h2>
+        <p class="text-slate-700 leading-relaxed">
+          This section is intentionally direct so indexing and LLM-style crawlers can
+          extract context quickly.
+        </p>
+        <dl class="mt-5 grid gap-3 text-sm">
+          <div class="rounded-xl border border-slate-200 bg-white/80 p-3">
+            <dt class="text-slate-500">Name</dt>
+            <dd class="font-semibold text-slate-900">Jan Hoon</dd>
           </div>
-        </Transition>
+          <div class="rounded-xl border border-slate-200 bg-white/80 p-3">
+            <dt class="text-slate-500">Primary role</dt>
+            <dd class="font-semibold text-slate-900">Data and Platform Engineer</dd>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white/80 p-3">
+            <dt class="text-slate-500">Topics</dt>
+            <dd class="font-semibold text-slate-900">Data platforms, observability, data product strategy</dd>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white/80 p-3">
+            <dt class="text-slate-500">Canonical domain</dt>
+            <dd class="font-semibold text-slate-900">janhoon.com</dd>
+          </div>
+        </dl>
+        <a href="/llms.txt" class="link-underline inline-flex mt-4 text-sm text-slate-700 font-semibold focus-ring rounded-md">
+          View llms.txt
+        </a>
+      </section>
+    </div>
+
+    <section id="skills" class="section-card p-5 md:p-8 mt-6">
+      <p class="kicker mb-4">Capability map</p>
+      <h2 class="display-heading text-3xl text-slate-900 mb-6">Tools and systems I work with</h2>
+      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <article
+          v-for="category in skillCategories"
+          :key="category.name"
+          class="rounded-2xl border border-slate-200 bg-white/80 p-4"
+        >
+          <h3 class="font-semibold text-slate-900 flex items-center gap-2 text-lg">
+            <Icon :icon="category.icon" class="w-5 h-5 text-teal-700" />
+            {{ category.name }}
+          </h3>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span
+              v-for="skill in category.skills"
+              :key="skill.name"
+              class="chip"
+            >
+              <Icon :icon="skill.icon" class="w-4 h-4 text-teal-700" />
+              <span class="font-mono text-[0.74rem] tracking-wide">{{ skill.name }}</span>
+            </span>
+          </div>
+        </article>
       </div>
-    </main>
-  </div>
+    </section>
+
+    <section id="projects" class="section-card p-5 md:p-8 mt-6">
+      <p class="kicker mb-4">Selected work</p>
+      <ProjectShowcase />
+    </section>
+
+    <section id="writing" class="section-card p-5 md:p-8 mt-6">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-2">
+        <div>
+          <p class="kicker mb-4">Writing</p>
+          <h2 class="display-heading text-3xl text-slate-900">Notes from platform and data work</h2>
+        </div>
+        <a href="/blog" class="link-underline text-slate-700 font-semibold focus-ring rounded-md">
+          Explore full blog archive
+        </a>
+      </div>
+      <BlogPreview :posts="posts" :limit="3" />
+    </section>
+  </main>
 </template>
-
-<style scoped>
-.tab-enter-active,
-.tab-leave-active {
-  transition: all 0.3s ease;
-}
-
-.tab-enter-from {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-
-.tab-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-</style>

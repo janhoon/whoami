@@ -9,11 +9,36 @@ const posts = (await getCollection('blog'))
     id: post.slug,
     title: post.data.title,
     date: post.data.date,
+    description: post.data.description,
   }))
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Jan Hoon blog',
+  description: 'Writing on data platforms, engineering, and practical system design.',
+  url: 'https://janhoon.com/blog',
+}
 ---
 
-<BlogLayout title="Blog - Jan Hoon" description="Articles by Jan Hoon">
-  <div class="w-full flex flex-col items-start">
-    <BlogPreview posts={posts} title="All Blog Posts" />
-  </div>
+<BlogLayout
+  title="Blog - Jan Hoon"
+  description="Writing on data platforms, engineering, and practical system design."
+  schema={schema}
+>
+  <section class="w-full flex flex-col items-start gap-4">
+    <h1 class="display-heading text-4xl text-slate-900">Essays and field notes</h1>
+    <p class="text-slate-700 max-w-2xl leading-relaxed">
+      A collection of practical articles on building better data teams, shaping platform
+      workflows, and turning messy systems into reliable products.
+    </p>
+    <BlogPreview posts={posts} title="All articles" />
+  </section>
+  <section class="rounded-2xl border border-slate-200 bg-white/80 p-5 mt-6">
+    <h2 class="text-xl font-semibold text-slate-900 mb-2">Prefer machine-readable context?</h2>
+    <p class="text-slate-700">
+      Crawlers and AI agents can use <a class="link-underline" href="/llms.txt">/llms.txt</a> for
+      compact portfolio metadata.
+    </p>
+  </section>
 </BlogLayout>

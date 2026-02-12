@@ -4,12 +4,25 @@ import '../../assets/css/main.css'
 interface Props {
   title?: string
   description?: string
+  ogType?: 'website' | 'article'
+  ogImage?: string
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>
+  noindex?: boolean
 }
 
 const {
   title = 'Jan Hoon',
   description = 'Data and Platform Engineer',
+  ogType = 'website',
+  ogImage = '/images/pfp.jpg',
+  schema,
+  noindex = false,
 } = Astro.props
+
+const baseUrl = 'https://janhoon.com'
+const canonical = Astro.url?.href ?? baseUrl
+const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, baseUrl).href
+const schemaMarkup = schema ? JSON.stringify(schema) : ''
 
 const posthogKey = import.meta.env.PUBLIC_POSTHOG_KEY
 const posthogHost = import.meta.env.PUBLIC_POSTHOG_HOST ?? 'https://eu.i.posthog.com'
@@ -28,19 +41,36 @@ posthog.init('${posthogKey}', { api_host: '${posthogHost}', capture_pageview: tr
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <meta name="theme-color" content="#0f172a" />
     <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteOgImage} />
+    <meta property="og:site_name" content="Jan Hoon" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400..800&display=swap"
     />
+    {schemaMarkup && <script type="application/ld+json" is:inline set:html={schemaMarkup} />}
     {analyticsScript && <script is:inline set:html={analyticsScript} />}
   </head>
-  <body>
-    <div class="bg-gray-800 text-gray-100 antialiased min-h-screen">
-      <slot />
-    </div>
+  <body class="site-body">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="site-chroma" aria-hidden="true"></div>
+    <slot />
   </body>
 </html>

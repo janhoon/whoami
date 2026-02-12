@@ -7,20 +7,25 @@ interface Props {
 }
 
 const { title, date, authorName, authorUrl } = Astro.props
+const parsed = new Date(date)
+const displayDate = Number.isNaN(parsed.getTime())
+  ? date
+  : new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(parsed)
 ---
 
-<div class="flex flex-col items-start justify-between w-full">
-  <h1 class="text-4xl font-bold mb-4">{title}</h1>
-  <a
-    href={authorUrl}
-    class="text-lg text-gray-400"
-    target={authorUrl.startsWith('http') ? '_blank' : undefined}
-    rel={authorUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
-  >
-    by
-    <span class="font-bold text-xl text-green-600 hover:text-green-500 hover:underline">
+<header class="flex flex-col items-start justify-between w-full gap-3">
+  <p class="kicker">Article</p>
+  <h1 class="display-heading text-4xl md:text-5xl text-slate-900 leading-tight">{title}</h1>
+  <div class="flex flex-wrap items-center gap-3 text-sm text-slate-600">
+    <a
+      href={authorUrl}
+      class="link-underline font-semibold"
+      target={authorUrl.startsWith('http') ? '_blank' : undefined}
+      rel={authorUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+    >
       {authorName}
-    </span>
-  </a>
-  <span class="text-lg text-gray-400">{date}</span>
-</div>
+    </a>
+    <span aria-hidden="true">-</span>
+    <time datetime={date} class="font-mono text-xs uppercase tracking-[0.08em]">{displayDate}</time>
+  </div>
+</header>

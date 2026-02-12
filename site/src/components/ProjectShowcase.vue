@@ -3,32 +3,46 @@ const projects = [
   {
     title: 'CADAC SQL Visualizer',
     description:
-      'A SQL syntax tree visualizer that allows users to visualize and understand the structure of SQL queries.',
+      'Interactive SQL syntax tree explorer built to help analysts and engineers inspect query structure faster.',
     url: 'https://sql.janhoon.com',
+    tags: ['SQL', 'Data tooling', 'Visualization'],
   },
 ]
 </script>
 
 <template>
   <div>
-    <h3 class="text-2xl font-bold mb-4 font-mono">Featured Projects</h3>
-    <div class="space-y-4">
-      <div
+    <h2 class="display-heading text-3xl text-slate-900 mb-4">Featured project</h2>
+    <div class="grid gap-4">
+      <article
         v-for="project in projects"
         :key="project.title"
-        class="p-4 rounded-lg border border-gray-700 hover:border-gray-600 transition-colors"
+        class="rounded-2xl border border-slate-200 bg-white/80 p-5"
       >
         <a
           :href="project.url"
-          class="hover:text-green-500 transition-colors"
+          class="group block"
           :aria-label="`View project: ${project.title}`"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <h4 class="font-bold font-mono">{{ project.title }}</h4>
-          <p class="text-sm text-gray-400 mt-1">{{ project.description }}</p>
+          <p class="kicker mb-3">Production project</p>
+          <h3 class="text-2xl font-semibold text-slate-900 group-hover:text-teal-700 transition-colors">
+            {{ project.title }}
+          </h3>
+          <p class="text-slate-700 mt-3 leading-relaxed">{{ project.description }}</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span
+              v-for="tag in project.tags"
+              :key="tag"
+              class="chip"
+            >
+              {{ tag }}
+            </span>
+          </div>
+          <span class="link-underline inline-block mt-5 text-slate-700 font-semibold">Open project</span>
         </a>
-      </div>
+      </article>
     </div>
   </div>
 </template>

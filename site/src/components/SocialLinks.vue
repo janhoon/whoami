@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-
 defineProps<{
   direction?: 'horizontal' | 'vertical'
 }>()
 
 const socialLinks = [
-  { icon: 'mdi:linkedin', url: 'https://www.linkedin.com/in/janhoon', label: 'LinkedIn profile' },
-  { icon: 'mdi:github', url: 'https://github.com/janhoon', label: 'GitHub profile' },
-  { icon: 'ri:twitter-x-fill', url: 'https://x.com/janhendrikhoon', label: 'X (Twitter) profile' },
+  { icon: '/images/linkedin.svg', url: 'https://www.linkedin.com/in/janhoon', label: 'LinkedIn profile' },
+  { icon: '/images/github_light.svg', url: 'https://github.com/janhoon', label: 'GitHub profile' },
+  { icon: '/images/x_light.svg', url: 'https://x.com/janhendrikhoon', label: 'X (Twitter) profile' },
 ]
 </script>
 
 <template>
   <div
-    class="flex gap-4"
-    :class="direction === 'vertical' ? 'flex-col' : 'flex-row'"
+    class="flex gap-2"
+    :class="direction === 'vertical' ? 'flex-col' : 'flex-row flex-wrap'"
   >
     <a
       v-for="link in socialLinks"
@@ -24,9 +22,10 @@ const socialLinks = [
       target="_blank"
       rel="noopener noreferrer"
       :aria-label="link.label"
-      class="text-gray-400 hover:text-gray-100 hover:scale-110 active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 rounded-full p-1"
+      class="focus-ring inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/85 px-3 py-1.5 text-slate-700 hover:text-teal-700 hover:border-teal-700/30 transition-colors"
     >
-      <Icon :icon="link.icon" class="w-5 h-5" />
+      <img :src="link.icon" :alt="link.label" class="w-4 h-4" loading="lazy" />
+      <span class="text-sm font-semibold">{{ link.label.split(' ')[0] }}</span>
     </a>
   </div>
 </template>

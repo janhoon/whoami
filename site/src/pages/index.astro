@@ -3,15 +3,47 @@ import { getCollection } from 'astro:content'
 import HomePage from '../components/HomePage.vue'
 import BaseLayout from '../layouts/BaseLayout.astro'
 
+const siteUrl = 'https://janhoon.com'
+
 const posts = (await getCollection('blog'))
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   .map((post) => ({
     id: post.slug,
     title: post.data.title,
     date: post.data.date,
+    description: post.data.description,
   }))
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Jan Hoon',
+    url: siteUrl,
+    image: `${siteUrl}/images/pfp.jpg`,
+    jobTitle: 'Data and Platform Engineer',
+    sameAs: [
+      'https://github.com/janhoon',
+      'https://www.linkedin.com/in/janhoon',
+      'https://x.com/janhendrikhoon',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Jan Hoon',
+    url: siteUrl,
+    inLanguage: 'en',
+    description: 'Portfolio of Jan Hoon, Data and Platform Engineer.',
+  },
+]
 ---
 
-<BaseLayout>
-  <HomePage posts={posts} client:load />
+<BaseLayout
+  title="Jan Hoon - Data and Platform Engineer"
+  description="Portfolio of Jan Hoon. Building dependable data products, platform foundations, and practical engineering systems."
+  ogImage="/images/pfp.jpg"
+  schema={schema}
+>
+  <HomePage posts={posts} />
 </BaseLayout>
