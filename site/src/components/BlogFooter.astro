@@ -1,0 +1,86 @@
+---
+import BuyMeACoffee from './BuyMeACoffee.astro'
+
+interface Props {
+  author: string
+  about: string
+  coffeeSlug: string
+  imageUrl: string
+  githubUrl?: string
+  linkedinUrl?: string
+  xUrl?: string
+}
+
+const {
+  author,
+  about,
+  coffeeSlug,
+  imageUrl,
+  githubUrl,
+  linkedinUrl,
+  xUrl,
+} = Astro.props
+---
+
+<div class="flex flex-col items-center justify-between w-full gap-4 py-4">
+  <div class="flex flex-row items-center justify-start bg-gray-700 rounded-lg p-4 w-full gap-4">
+    <img
+      src={imageUrl}
+      alt={author}
+      width="100"
+      height="100"
+      class="rounded-full"
+      loading="lazy"
+    />
+    <div class="flex flex-col items-start justify-between w-full">
+      <span class="text-lg font-bold">{author}</span>
+      <span class="text-sm text-gray-400">{about}</span>
+    </div>
+    <div class="flex flex-col items-end justify-start gap-2">
+      {githubUrl && (
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile"
+          class="text-sm text-gray-400 hover:text-white"
+        >
+          <img src="/images/github_light.svg" alt="GitHub" class="w-6 h-6" />
+        </a>
+      )}
+      {linkedinUrl && (
+        <a
+          href={linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn profile"
+          class="text-sm text-gray-400 hover:text-blue-500"
+        >
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+      )}
+      {xUrl && (
+        <a
+          href={xUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X (Twitter) profile"
+          class="text-sm text-gray-400 hover:text-white"
+        >
+          <img src="/images/x_light.svg" alt="X" class="w-6 h-6" />
+        </a>
+      )}
+    </div>
+  </div>
+
+  <div class="flex flex-row items-center justify-between w-full">
+    <a
+      href="/blog"
+      class="text-sm flex flex-row items-center justify-center gap-2 text-green-500 hover:text-green-600"
+    >
+      <span aria-hidden="true">&larr;</span>
+      Back to blogs
+    </a>
+    <BuyMeACoffee slug={coffeeSlug} />
+  </div>
+</div>

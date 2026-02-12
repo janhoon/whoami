@@ -2,11 +2,15 @@
 node_modules
 
 # Build outputs
+dist
+.astro
 .output
 .nuxt
 .nitro
 .cache
 .data
+.next
+.open-next
 
 # Git
 .git

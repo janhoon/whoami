@@ -1,9 +1,18 @@
-# Nuxt dev/build outputs
+# Astro dev/build outputs
+dist
+.astro
+
+# Legacy framework outputs
 .output
 .data
 .nuxt
 .nitro
 .cache
+.next
+.open-next
+
+tsconfig.tsbuildinfo
+next-env.d.ts
 
 # Node dependencies
 node_modules

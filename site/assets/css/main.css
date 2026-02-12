@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('~/assets/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  src: url('../fonts/JetBrainsMono-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('~/assets/fonts/JetBrainsMono-SemiBold.woff2') format('woff2');
+  src: url('../fonts/JetBrainsMono-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -18,13 +18,15 @@
 
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('~/assets/fonts/JetBrainsMono-Bold.woff2') format('woff2');
+  src: url('../fonts/JetBrainsMono-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 body {
+  background-color: rgb(31 41 55);
+  color: rgb(243 244 246);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -38,6 +40,68 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.prose h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose p {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose ul {
+  list-style: disc;
+  margin-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.prose li {
+  font-size: 1.125rem;
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose a {
+  color: rgb(34 197 94);
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: rgb(74 222 128);
 }
 
 @layer base {

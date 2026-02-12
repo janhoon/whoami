@@ -51,7 +51,7 @@ data? Let's go through some examples:
 
 - **Databases and Data Stores**: Your services and applications will generate
   data as they are used. Don't just use the tables you think are
-  useful—bring everything, even if you don't need all of it at first. Also
+  useful-bring everything, even if you don't need all of it at first. Also
   revise and update your databases to match your needs. If there is something
   you can track and store to follow an experiment or new feature, do it and store
   it.
@@ -72,8 +72,8 @@ decisions.
 ### 2. ELT, ETL Or Whatever You Want To Call It
 
 You've selected your sources and have set up some data integration service to
-pull all of the data into a central location—be it Snowflake, Databricks, or
-Excel—but the job is not done. To build trust in the completeness of your
+pull all of the data into a central location-be it Snowflake, Databricks, or
+Excel-but the job is not done. To build trust in the completeness of your
 data, you need to not just cover a wide range of data, but be able to ensure how
 complete the datasets are.
 

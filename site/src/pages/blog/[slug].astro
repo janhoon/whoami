@@ -1,0 +1,52 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import BlogFooter from '../../components/BlogFooter.astro'
+import BlogTitle from '../../components/BlogTitle.astro'
+import BlogLayout from '../../layouts/BlogLayout.astro'
+
+export const prerender = true
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }))
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>
+}
+
+const { post } = Astro.props
+const { Content } = await post.render()
+---
+
+<BlogLayout
+  title={`${post.data.title} - Jan Hoon`}
+  description={post.data.description ?? 'Blog post from Jan Hoon'}
+>
+  <div class="w-full">
+    <BlogTitle
+      title={post.data.title}
+      date={post.data.date}
+      authorName={post.data.author?.name ?? 'Jan Hoon'}
+      authorUrl={post.data.author?.url ?? 'https://janhoon.com'}
+    />
+
+    <div class="prose prose-invert prose-lg max-w-none mt-8">
+      <Content />
+    </div>
+
+    <BlogFooter
+      author="Jan Hoon"
+      about="Data & Platform Engineer"
+      coffeeSlug="janhoon"
+      imageUrl="https://github.com/janhoon.png"
+      githubUrl="https://github.com/janhoon"
+      linkedinUrl="https://www.linkedin.com/in/janhoon"
+      xUrl="https://x.com/janhoon"
+    />
+  </div>
+</BlogLayout>

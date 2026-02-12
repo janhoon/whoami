@@ -8,7 +8,7 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 # Copy package files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-# Install dependencies (with build scripts for better-sqlite3)
+# Install dependencies
 RUN pnpm install --frozen-lockfile
 
 # Stage 2: Build the application
@@ -25,7 +25,7 @@ COPY --from=deps /app/package.json ./package.json
 # Copy source files
 COPY . .
 
-# Build the Nuxt application
+# Build the Astro application
 ENV NODE_ENV=production
 RUN pnpm build
 
@@ -39,7 +39,7 @@ ENV HOST=0.0.0.0
 ENV PORT=3000
 
 # Copy the built output
-COPY --from=builder /app/.output ./.output
+COPY --from=builder /app/dist ./dist
 
 # Expose the port
 EXPOSE 3000
@@ -49,4 +49,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
   CMD wget -qO- http://localhost:3000/ || exit 1
 
 # Run the server
-CMD ["node", ".output/server/index.mjs"]
+CMD ["node", "dist/server/entry.mjs"]

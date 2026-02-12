@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+
 defineProps<{
   direction?: 'horizontal' | 'vertical'
 }>()
@@ -12,9 +14,6 @@ const socialLinks = [
 
 <template>
   <div
-    v-motion
-    :initial="{ opacity: 0 }"
-    :enter="{ opacity: 1, transition: { duration: 500, delay: 600 } }"
     class="flex gap-4"
     :class="direction === 'vertical' ? 'flex-col' : 'flex-row'"
   >
@@ -27,7 +26,7 @@ const socialLinks = [
       :aria-label="link.label"
       class="text-gray-400 hover:text-gray-100 hover:scale-110 active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 rounded-full p-1"
     >
-      <Icon :name="link.icon" class="w-5 h-5" />
+      <Icon :icon="link.icon" class="w-5 h-5" />
     </a>
   </div>
 </template>
