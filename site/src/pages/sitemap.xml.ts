@@ -1,24 +1,39 @@
-import { getCollection } from 'astro:content'
+import { getCollection } from "astro:content";
 
-export const prerender = true
+export const prerender = true;
 
 export async function GET() {
-  const baseUrl = 'https://janhoon.com'
-  const now = new Date().toISOString()
+  const baseUrl = "https://janhoon.com";
+  const now = new Date().toISOString();
 
-  const posts = await getCollection('blog')
+  const posts = await getCollection("blog");
 
   const urls = [
-    { loc: baseUrl, lastmod: now, changefreq: 'monthly', priority: '1.0' },
-    { loc: `${baseUrl}/blog`, lastmod: now, changefreq: 'weekly', priority: '0.8' },
-    { loc: `${baseUrl}/llms.txt`, lastmod: now, changefreq: 'monthly', priority: '0.5' },
-    ...posts.map((post) => ({
-      loc: `${baseUrl}/blog/${post.slug}`,
+    { loc: baseUrl, lastmod: now, changefreq: "monthly", priority: "1.0" },
+    {
+      loc: `${baseUrl}/blog`,
       lastmod: now,
-      changefreq: 'monthly',
-      priority: '0.7',
-    })),
-  ]
+      changefreq: "weekly",
+      priority: "0.8",
+    },
+    {
+      loc: `${baseUrl}/llms.txt`,
+      lastmod: now,
+      changefreq: "monthly",
+      priority: "0.5",
+    },
+    ...posts.map((post) => {
+      const modified = post.data.updated ?? post.data.date;
+      const parsed = new Date(modified);
+
+      return {
+        loc: `${baseUrl}/blog/${post.slug}`,
+        lastmod: Number.isNaN(parsed.getTime()) ? now : parsed.toISOString(),
+        changefreq: "monthly",
+        priority: "0.7",
+      };
+    }),
+  ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -29,14 +44,14 @@ ${urls
     <lastmod>${url.lastmod}</lastmod>
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
-  </url>`
+  </url>`,
   )
-  .join('\n')}
-</urlset>`
+  .join("\n")}
+</urlset>`;
 
   return new Response(xml, {
     headers: {
-      'content-type': 'application/xml; charset=utf-8',
+      "content-type": "application/xml; charset=utf-8",
     },
-  })
+  });
 }

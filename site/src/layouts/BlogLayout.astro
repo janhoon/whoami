@@ -5,16 +5,29 @@ interface Props {
   title?: string
   description?: string
   schema?: Record<string, unknown> | Array<Record<string, unknown>>
+  ogType?: 'website' | 'article'
+  articlePublishedTime?: string
+  articleModifiedTime?: string
 }
 
 const {
   title = 'Jan Hoon blog',
   description = 'Posts by Jan Hoon',
   schema,
+  ogType = 'website',
+  articlePublishedTime,
+  articleModifiedTime,
 } = Astro.props
 ---
 
-<BaseLayout title={title} description={description} ogType="article" schema={schema}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogType={ogType}
+  schema={schema}
+  articlePublishedTime={articlePublishedTime}
+  articleModifiedTime={articleModifiedTime}
+>
   <main id="main-content" class="page-shell py-6 md:py-10">
     <div class="section-card p-4 md:p-6 lg:p-8">
       <div class="flex flex-wrap items-end justify-between gap-4 pb-6 border-b border-slate-200">

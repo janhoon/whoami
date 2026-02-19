@@ -2,15 +2,26 @@
 interface Props {
   title: string
   date: string
+  updatedDate?: string
   authorName: string
   authorUrl: string
 }
 
-const { title, date, authorName, authorUrl } = Astro.props
-const parsed = new Date(date)
-const displayDate = Number.isNaN(parsed.getTime())
+const { title, date, updatedDate, authorName, authorUrl } = Astro.props
+
+const publishedParsed = new Date(date)
+const displayPublishedDate = Number.isNaN(publishedParsed.getTime())
   ? date
-  : new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(parsed)
+  : new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(publishedParsed)
+
+const updatedParsed = updatedDate ? new Date(updatedDate) : null
+const displayUpdatedDate = updatedParsed && !Number.isNaN(updatedParsed.getTime())
+  ? new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(updatedParsed)
+  : updatedDate
+
+const baseDomain = 'https://janhoon.com'
+const authorAbsoluteUrl = authorUrl.startsWith('http') ? authorUrl : new URL(authorUrl, baseDomain).href
+const isExternalAuthor = !authorAbsoluteUrl.startsWith(baseDomain)
 ---
 
 <header class="flex flex-col items-start justify-between w-full gap-3">
@@ -18,14 +29,20 @@ const displayDate = Number.isNaN(parsed.getTime())
   <h1 class="display-heading text-4xl md:text-5xl text-slate-900 leading-tight">{title}</h1>
   <div class="flex flex-wrap items-center gap-3 text-sm text-slate-600">
     <a
-      href={authorUrl}
+      href={authorAbsoluteUrl}
       class="link-underline font-semibold"
-      target={authorUrl.startsWith('http') ? '_blank' : undefined}
-      rel={authorUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+      target={isExternalAuthor ? '_blank' : undefined}
+      rel={isExternalAuthor ? 'noopener noreferrer' : undefined}
     >
       {authorName}
     </a>
     <span aria-hidden="true">-</span>
-    <time datetime={date} class="font-mono text-xs uppercase tracking-[0.08em]">{displayDate}</time>
+    <time datetime={date} class="font-mono text-xs uppercase tracking-[0.08em]">{displayPublishedDate}</time>
+    {displayUpdatedDate && updatedDate && (
+      <>
+        <span aria-hidden="true">-</span>
+        <span class="font-mono text-xs uppercase tracking-[0.08em]">Updated {displayUpdatedDate}</span>
+      </>
+    )}
   </div>
 </header>

@@ -22,17 +22,31 @@ interface Props {
 const { post } = Astro.props
 const { Content } = await post.render()
 
+const publishedDate = new Date(post.data.date)
+const modifiedDate = post.data.updated ? new Date(post.data.updated) : publishedDate
+const publishedIso = Number.isNaN(publishedDate.getTime()) ? post.data.date : publishedDate.toISOString()
+const modifiedIso = Number.isNaN(modifiedDate.getTime())
+  ? post.data.updated ?? post.data.date
+  : modifiedDate.toISOString()
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: post.data.title,
   description: post.data.description ?? 'Article by Jan Hoon',
-  datePublished: post.data.date,
+  datePublished: publishedIso,
+  dateModified: modifiedIso,
   author: {
     '@type': 'Person',
     name: post.data.author?.name ?? 'Jan Hoon',
     url: post.data.author?.url ?? 'https://janhoon.com',
   },
+  publisher: {
+    '@type': 'Person',
+    name: 'Jan Hoon',
+    url: 'https://janhoon.com',
+  },
+  image: 'https://janhoon.com/images/pfp.jpg',
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': `https://janhoon.com/blog/${post.slug}`,
@@ -44,11 +58,15 @@ const schema = {
   title={`${post.data.title} - Jan Hoon`}
   description={post.data.description ?? 'Blog post from Jan Hoon'}
   schema={schema}
+  ogType="article"
+  articlePublishedTime={publishedIso}
+  articleModifiedTime={modifiedIso}
 >
   <article class="w-full">
     <BlogTitle
       title={post.data.title}
       date={post.data.date}
+      updatedDate={post.data.updated}
       authorName={post.data.author?.name ?? 'Jan Hoon'}
       authorUrl={post.data.author?.url ?? 'https://janhoon.com'}
     />
@@ -61,7 +79,7 @@ const schema = {
       author="Jan Hoon"
       about="Data & Platform Engineer"
       coffeeSlug="janhoon"
-      imageUrl="https://github.com/janhoon.png"
+      imageUrl="/images/pfp.jpg"
       githubUrl="https://github.com/janhoon"
       linkedinUrl="https://www.linkedin.com/in/janhoon"
       xUrl="https://x.com/janhoon"
