@@ -27,7 +27,7 @@ without having to assemble a fragmented UI layer.
 
 The project is intentionally self-hosted first and open by default.
 
-You can follow the project at
+You can follow the project and use the live ACE service at
 **[aceobservability.com](https://aceobservability.com)**.
 
 ## Key capabilities in ACE

@@ -19,8 +19,8 @@ natural, and surprisingly effective.
 
 Virtual Office starts from that same interaction model on purpose.
 
-If you want to follow the product itself, you can see it at
-**[getspeke.com](https://getspeke.com)**.
+If you want to follow the product itself, the live Speke service is available
+at **[getspeke.com](https://getspeke.com)**.
 
 The difference is that we are building it for companies that have to operate
 with policy, accountability, and organizational control from day one.
