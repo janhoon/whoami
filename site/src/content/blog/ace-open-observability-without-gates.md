@@ -23,6 +23,8 @@ It is built for teams that want one place to investigate systems across Promethe
 
 The project is intentionally self-hosted first and open by default.
 
+You can follow the project at **[aceobservability.com](https://aceobservability.com)**.
+
 ## Key capabilities in ACE
 
 At a practical level, ACE focuses on the capabilities teams use every week:

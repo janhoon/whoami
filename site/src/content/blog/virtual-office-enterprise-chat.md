@@ -15,6 +15,8 @@ One of the things Discord got very right is the room model: a clear set of chann
 
 Virtual Office starts from that same interaction model on purpose.
 
+If you want to follow the product itself, you can see it at **[getspeke.com](https://getspeke.com)**.
+
 The difference is that we are building it for companies that have to operate with policy, accountability, and organizational control from day one.
 
 ## Why this is being created
