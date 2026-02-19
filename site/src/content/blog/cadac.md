@@ -51,7 +51,7 @@ data? Let's go through some examples:
 
 - **Databases and Data Stores**: Your services and applications will generate
   data as they are used. Don't just use the tables you think are
-  useful-bring everything, even if you don't need all of it at first. Also
+  useful—bring everything, even if you don't need all of it at first. Also
   revise and update your databases to match your needs. If there is something
   you can track and store to follow an experiment or new feature, do it and store
   it.
@@ -69,10 +69,10 @@ data? Let's go through some examples:
 Be creative and make sure you are generating the data necessary to make the right
 decisions.
 
-### 2. ELT, ETL Or Whatever You Want To Call It
+### 2. ELT, ETL, or Whatever You Want to Call It
 
 You've selected your sources and have set up some data integration service to
-pull all of the data into a central location-be it Snowflake, Databricks, or
+pull all of the data into a central location—be it Snowflake, Databricks, or
 Excel-but the job is not done. To build trust in the completeness of your
 data, you need to not just cover a wide range of data, but be able to ensure how
 complete the datasets are.
@@ -95,7 +95,7 @@ wrong. Accuracy is about whether the values in your system represent reality as
 closely as possible.
 
 In practice, this is where many teams get surprised. The pipeline "works," the
-dashboard loads, and everyone moves on-until a business decision is made on top
+dashboard loads, and everyone moves on—until a business decision is made on top
 of a metric with a subtle bug. Then trust drops quickly.
 
 To reduce this risk, I like to focus on three things.
@@ -241,7 +241,7 @@ That loop is where data maturity becomes product maturity.
 ## Compliant
 
 The final letter is compliance. This is the part people often postpone because
-it feels like a blocker-until it becomes urgent.
+it feels like a blocker—until it becomes urgent.
 
 Compliance is not just about avoiding penalties. It is about protecting your
 users, your business, and your team.
