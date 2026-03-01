@@ -1,3 +1,5 @@
+export const prerender = false
+
 import type { APIRoute } from 'astro'
 
 const POSTHOG_HOST = 'https://eu.i.posthog.com'
@@ -13,13 +15,27 @@ async function proxyToPostHog(request: Request, path: string): Promise<Response>
     if (val) headers.set(key, val)
   }
 
+  // Read body as ArrayBuffer first — Cloudflare Workers can't reliably stream
+  // request.body directly into a fetch call (body may be consumed or unavailable)
+  let body: ArrayBuffer | undefined
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    try {
+      body = await request.arrayBuffer()
+    } catch {
+      body = undefined
+    }
+  }
+
   const res = await fetch(targetUrl, {
     method: request.method,
     headers,
-    body: request.method !== 'GET' && request.method !== 'HEAD' ? request.body : undefined,
+    body: body && body.byteLength > 0 ? body : undefined,
   })
 
-  return new Response(res.body, {
+  // Read response as ArrayBuffer too — avoids streaming issues on the way back
+  const responseBody = await res.arrayBuffer()
+
+  return new Response(responseBody, {
     status: res.status,
     headers: {
       'Content-Type': res.headers.get('Content-Type') ?? 'application/json',
