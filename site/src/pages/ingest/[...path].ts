@@ -7,8 +7,8 @@ async function proxyToPostHog(request: Request, path: string): Promise<Response>
   const targetUrl = `${POSTHOG_HOST}/${path}${url.search}`
 
   const headers = new Headers()
-  // Forward relevant headers
-  for (const key of ['content-type', 'user-agent', 'x-forwarded-for']) {
+  // Forward relevant headers — content-type is critical for sendBeacon (pageleave)
+  for (const key of ['content-type', 'user-agent', 'x-forwarded-for', 'origin', 'referer']) {
     const val = request.headers.get(key)
     if (val) headers.set(key, val)
   }
