@@ -279,3 +279,7 @@ The solution is not less AI. It is more of it, applied to the right problem.
 
 *Jan Hoon is a software developer based in Portugal, building Speke, Ace Observability,
 Veldix, and several other products — mostly with AI assistance.*
+
+---
+
+*This post was written with AI assistance for grammar and phrasing. The intent, the opinions, and the meaning are entirely my own.*
