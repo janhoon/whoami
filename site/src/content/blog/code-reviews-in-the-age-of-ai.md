@@ -15,8 +15,9 @@ issues, and shipping things that would have taken weeks in a matter of days.
 The acceleration is real and it compounds quickly.
 
 But there is a cost that is starting to show up in engineering backlogs
-everywhere: pull requests are getting large, complex, and frequent — and the
-people responsible for reviewing them are not keeping up.
+everywhere: pull requests are getting large, complex, and frequent — and
+there is only so much code a developer can read in a day. That capacity
+has not changed. The volume has.
 
 ## What has actually changed
 
