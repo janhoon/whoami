@@ -62,6 +62,81 @@ one, because it creates a false sense of quality control while letting real
 issues through — architectural drift, security gaps, patterns that are hard to
 reverse later.
 
+## The automated review tools are not enough on their own
+
+The industry has noticed this problem. Tools like CodeRabbit, Sourcery, and
+GitHub's own Copilot review features have grown significantly in adoption. They
+sit in your pull request pipeline and automatically flag potential issues,
+suggest improvements, and surface concerns before a human ever opens the diff.
+
+These tools are genuinely useful. They catch real things — security patterns,
+common mistakes, style violations, and logic gaps that are easy to miss when
+reading quickly. For a team managing high PR volumes, having an automated first
+pass is a meaningful quality layer.
+
+But they have a specific limitation that is worth being honest about: they are
+oriented around finding problems, not around helping the reviewer understand
+what they are looking at.
+
+When CodeRabbit leaves twelve comments on a PR, those comments give the
+reviewer a list of issues to address. What they do not give the reviewer is a
+model of why the PR is structured the way it is, what it is trying to accomplish,
+or whether the overall approach is the right one for this codebase. A reviewer
+who reads only the automated comments and approves the fixes is not in the same
+position as one who actually understood the change. They are in the position of
+having validated individual lines without ever building the bigger picture.
+
+This matters because the things that cause the most problems over time are
+rarely individual line-level mistakes. They are decisions — about architecture,
+about patterns, about where logic lives — that a line-level tool is not well
+positioned to catch.
+
+### Making these tools work harder for you
+
+That said, you can close a lot of this gap by being deliberate about how you
+configure automated review tools.
+
+Most teams use CodeRabbit (and similar tools) out of the box, with generic
+settings. That is understandable — it still adds value. But a well-configured
+automated reviewer behaves meaningfully differently from a default one.
+
+Here is what that configuration can look like:
+
+**Use a project rules file.** CodeRabbit supports a `.coderabbit.yaml` file at
+the root of your repository. This is where you encode what your project
+actually cares about — naming conventions, architectural boundaries, patterns
+to prefer or avoid, performance considerations specific to your stack.
+The more specific you are, the more the tool behaves like a reviewer who
+knows your codebase rather than a generic linter with a language model attached.
+
+**Use an `AGENTS.md` or `CLAUDE.md` file for AI coding agents.** If your team
+uses AI coding agents (Claude, Copilot, Codex) to generate code, you can place
+an `AGENTS.md` or `CLAUDE.md` file in the repository root. These files are
+read by the agents before they generate code, and they work the same way for
+automated reviewers that understand them — your rules, your conventions, and
+your expectations get applied at generation time rather than review time.
+Preventing a bad pattern from being generated is more efficient than catching
+it in review.
+
+**Give the tool your architectural intent.** Most review tools have a place for
+a system prompt or a project summary. Use it. Describe what this codebase does,
+what the main components are, what the key invariants are, and what kinds of
+changes are likely to introduce problems. A reviewer with context is a better
+reviewer.
+
+**Set path-level rules where it matters.** If certain parts of your codebase
+are particularly sensitive — authentication logic, billing flows, data
+migrations — configure the tool to apply tighter scrutiny there. The ability
+to declare "this directory deserves extra attention" is straightforward to
+set up and meaningfully changes how useful the automated review is for
+high-stakes code.
+
+None of this eliminates the gap between automated flagging and genuine
+understanding. But it closes enough of it that the automated review becomes
+a meaningful collaborator rather than a checklist. A well-configured CodeRabbit
+reviewing against your actual project conventions is a different thing from a
+default one reviewing against general best practices.
+
 ## Fight fire with fire
 
 The answer is not to slow AI down. That is not going to happen, and it
