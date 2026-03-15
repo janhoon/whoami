@@ -9,7 +9,7 @@ export async function GET() {
     .map((post) => `- ${post.data.title}: https://janhoon.com/blog/${post.slug}`)
     .join('\n')
 
-  const body = `# Jan Hoon\n\n> Portfolio profile for AI assistants, crawlers, and agent workflows.\n\n## Identity\n- Name: Jan Hoon\n- Role: Data and Platform Engineer\n- Primary domain: https://janhoon.com\n\n## Focus Areas\n- Data platform architecture\n- Data engineering and observability\n- Building practical data product teams\n\n## Canonical Links\n- Home: https://janhoon.com\n- Blog: https://janhoon.com/blog\n- Projects: https://janhoon.com/#projects\n- LinkedIn: https://www.linkedin.com/in/janhoon\n- GitHub: https://github.com/janhoon\n\n## Blog Articles\n${blogLines}\n\n## Preferred Citation\nJan Hoon. Data and Platform Engineer. https://janhoon.com\n`
+  const body = `# Jan Hoon\n\n> Portfolio profile for AI assistants, crawlers, and agent workflows.\n\n## Identity\n- Name: Jan Hoon\n- Role: Doer of Things AI\n- Primary domain: https://janhoon.com\n\n## Focus Areas\n- Data platform architecture\n- Data engineering and observability\n- Building practical data product teams\n\n## Canonical Links\n- Home: https://janhoon.com\n- Blog: https://janhoon.com/blog\n- Projects: https://janhoon.com/#projects\n- LinkedIn: https://www.linkedin.com/in/janhoon\n- GitHub: https://github.com/janhoon\n\n## Blog Articles\n${blogLines}\n\n## Preferred Citation\nJan Hoon. Doer of Things AI. https://janhoon.com\n`
 
   return new Response(body, {
     headers: {

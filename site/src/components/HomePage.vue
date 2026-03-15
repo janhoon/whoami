@@ -55,7 +55,7 @@ const skillCategories = [
     <header class="section-card p-5 md:p-8 lg:p-10">
       <div class="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
         <div class="space-y-4">
-          <span class="kicker">Data and Platform Engineer</span>
+          <span class="kicker">Doer of Things AI</span>
           <h1 class="display-heading text-5xl sm:text-6xl leading-[0.95] text-slate-900">
             Jan Hoon
           </h1>
@@ -147,7 +147,7 @@ const skillCategories = [
           </div>
           <div class="rounded-xl border border-slate-200 bg-white/80 p-3">
             <dt class="text-slate-500">Primary role</dt>
-            <dd class="font-semibold text-slate-900">Data and Platform Engineer</dd>
+            <dd class="font-semibold text-slate-900">Doer of Things AI</dd>
           </div>
           <div class="rounded-xl border border-slate-200 bg-white/80 p-3">
             <dt class="text-slate-500">Topics</dt>
